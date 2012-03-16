@@ -30,6 +30,7 @@ def endpoint(request):
 
     profile = request.user.get_profile()
     profile.oauth_token = token_string
+    profile.is_valid_token = True
     profile.save()
 
     return HttpResponse('wat')
