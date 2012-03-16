@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Photoblog™ — My photoalbums
+{% endblock %}
+
+{% block header %}
+My photoalbums
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span4">
+            <ul>
+                {% for photoalbum in photoalbums %}
+                    <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

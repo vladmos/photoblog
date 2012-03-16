@@ -18,7 +18,7 @@ Photoblog administration
             {% if photoalbums %}
                 <ul>
                     {% for photoalbum in photoalbums %}
-                        <li>{{ photoalbum.name }}</li>
+                        <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}

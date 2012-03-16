@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Photoblog™ — photoalbum “{{ photoalbum.name }}”
+{% endblock %}
+
+{% block header %}
+Photoalbum “{{ photoalbum.name }}”
+<small>{{ photoalbum.photos.all|length }} photo{{ photoalbum.photos.all|length|pluralize }}</small>
+{% endblock %}
+
+{% block content %}
+    <ul class="thumbnails">
+        {% for photo in photoalbum.photos.all %}
+            <li class="span2">
+                <div class="thumbnail">
+                    <a href="{{ photo.page_url }}" target="_blank">
+                        <img src="{{ photo.thumbnail_url }}" alt="{{ photo.picasa_id }}">
+                    </a>
+                    {% if photo.description %}
+                        <p>{{ photo.description }}</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

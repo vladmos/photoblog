@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Photoblog moderation</title>
+    <title>{% block title %}Photoblog™{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html, charset=utf-8">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type="text/css" />
 
@@ -14,7 +14,7 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#">
+            <a class="brand" href="{% url management:index %}">
                 Photoblog™
             </a>
             <ul class="nav">
@@ -24,10 +24,12 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        {% for photoalbum in photoalbums %}
-                            <li><a href="">{{ photoalbum.name }}</a></li>
-                        {% endfor %}
                         {% if photoalbums %}
+                            <li><a href="{% url management:photoalbums %}">Manage photoalbums</a></li>
+                            <li class="divider"></li>
+                            {% for photoalbum in photoalbums %}
+                                <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
+                            {% endfor %}
                             <li class="divider"></li>
                         {% endif %}
                         <li><a href="">Fetch albums</a></li>
