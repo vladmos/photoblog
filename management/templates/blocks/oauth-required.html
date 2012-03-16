@@ -1,0 +1,14 @@
+<div class="alert alert-block">
+    <div class="container-fluid">
+        <form method="POST" action="{% url personal:oauth_login %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-warning btn-large" value="Register with oAuth" />
+        </form>
+    </div>
+    <div class="container-fluid">
+        <h3 class="alert-heading">Google authentication required</h3>
+        You need to approve the photoblog engine to access your Picasa photoalbums.<br/>
+        You will be able to revoke the authorization token any time at
+        <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
+    </div>
+</div>

@@ -1,9 +1,22 @@
-{% extends "base.html" %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Photoblog™</title>
+    <meta http-equiv="Content-type" content="text/html, charset=utf-8">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type="text/css" />
+<body>
 
-{% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Login"/>
-    </form>
-{% endblock %}
+<div class="container">
+    <div class="hero-unit">
+        <h1>Welcome to Photoblog™</h1>
+        <p>The revolutionary photoblog engine</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" type="submit" value="Login"/>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

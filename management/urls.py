@@ -6,7 +6,7 @@ import views
 
 urlpatterns = patterns('',
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
-    url(r'^logout/$', logout, name='logout'),
+    url(r'^logout/$', logout, {'next_page': '/admin/login/'}, name='logout'),
     url(r'^$', views.index, name='index'),
 )
 

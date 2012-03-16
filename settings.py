@@ -30,7 +30,9 @@ STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-STATICFILES_DIRS = ()
+STATICFILES_DIRS = (
+    '/Users/vladmos/code/photoblog/static',
+)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -85,8 +87,8 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = 'personal.UserProfile'
-LOGIN_URL = '/~/login/'
-LOGIN_REDIRECT_URL = '/~/'
+LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/admin/'
 
 LOGGING = {
     'version': 1,

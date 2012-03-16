@@ -1,21 +1,45 @@
 {% extends "base.html" %}
 
+{% block header %}
+Photoblog administration
+{% endblock %}
+
 {% block content %}
-    <h1>Hello, {{ user.username }}!</h1>
-    <h2>Your account status:</h2>
-    <p>
-        {% if user.profile.is_valid_token %}
-            Google oauth token: {{ user.profile.oauth_token }}.
-            <p class="help">
+    <div class="row">
+        <div class="span5">
+            <h2>Photoalbums</h2>
+            {% if not user.profile.is_valid_token %}
+                {% include "blocks/oauth-required.html" %}
+            {% else %}
+                <div class="alert alert-success">
+                    Your photoalbums have been scheduled to be imported shortly.
+                </div>
+            {% endif %}
+            {% if photoalbums %}
+                <ul>
+                    {% for photoalbum in photoalbums %}
+                        <li>{{ photoalbum.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="span5 offset2">
+            <h2>Articles</h2>
+            {% if not articles %}
+                <div class="alert alert-info">
+                    You don't have any articles yet.
+                    {% if not photoalbums %}
+                        To create one you need to import at least one photoalbum from Picasa.
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if photoalbums %}
+                <a class="btn btn-inverse">Create an article</a>
+            {% endif %}
+        </div>
+    </div>
+            <!--p class="help">
                 You can revoke the token at <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
                 It will become inactive here on the next unsuccessful authorization attempt.
-            </p>
-        {% else %}
-            Google oauth token is not activated.
-            <form method="POST" action="{% url personal:oauth_login %}">
-                {% csrf_token %}
-                <input type="submit" value="Activate token now">
-            </form>
-        {% endif %}
-    </p>
+            </p-->
 {% endblock %}
