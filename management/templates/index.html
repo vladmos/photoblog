@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hello, {{ user.username }}!</h1>
+    <h2>Your account status:</h2>
+    <p>
+        {% if user.profile.is_valid_token %}
+            Google oauth token: {{ user.profile.oauth_token }}.
+            <p class="help">
+                You can revoke the token at <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
+                It will become inactive here on the next unsuccessful authorization attempt.
+            </p>
+        {% else %}
+            Google oauth token is not activated.
+            <form method="POST" action="{% url personal:oauth_login %}">
+                {% csrf_token %}
+                <input type="submit" value="Activate token now">
+            </form>
+        {% endif %}
+    </p>
+{% endblock %}
