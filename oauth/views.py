@@ -33,16 +33,3 @@ def endpoint(request):
     profile.save()
 
     return HttpResponse('wat')
-
-def photos(request):
-    token_string = request.GET.get('token')
-
-    token = gdata.auth.AuthSubToken()
-    token.set_token_string(token_string)
-
-    picasa_service = gdata.photos.service.PhotosService()
-    picasa_service.SetOAuthToken(token)
-
-    albums = picasa_service.GetUserFeed()
-
-    return HttpResponse(str(albums))
