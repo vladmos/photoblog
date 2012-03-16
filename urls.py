@@ -1,11 +1,11 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, include
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
     
-    #(r'^', include('picasa.urls')),
-    (r'^oauth/', include('oauth.urls'))
+    (r'^oauth/', include('personal.urls', namespace='personal')),
+    (r'^~/', include('management.urls', namespace='management')),
 )

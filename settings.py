@@ -53,6 +53,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.csrf',
+)
+
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
@@ -69,11 +79,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'oauth',
+    'personal',
     'picasa',
+    'management',
 )
 
-AUTH_PROFILE_MODULE = 'oauth.UserProfile'
+AUTH_PROFILE_MODULE = 'personal.UserProfile'
+LOGIN_URL = '/~/login/'
+LOGIN_REDIRECT_URL = '/~/'
 
 LOGGING = {
     'version': 1,
@@ -94,6 +107,7 @@ LOGGING = {
 }
 
 PICASA_SCOPE = 'https://picasaweb.google.com/data/'
+GOOGLE_TOKEN_MANAGEMENT_URL = 'https://accounts.google.com/b/0/IssuedAuthSubTokens'
 
 from secret_settings import *
 # SECRET_KEY
