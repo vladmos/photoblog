@@ -7,6 +7,7 @@ from utils import response
 from forms import ArticleForm, UserForm, UserProfileForm, CustomPasswordChangeForm
 from picasa.models import PicasaAlbum
 from frontend.models import Article
+from frontend.utils import compile_article
 
 @login_required
 def index(request):
@@ -54,7 +55,12 @@ def save_article(request, article_id=None):
     else:
         form = ArticleForm(request.POST)
 
-    if form.is_valid():
+    compiled_text = u''
+    if 'preview' in request.POST:
+        raw_text = request.POST.get('raw_text', u'')
+        compiled_text = compile_article(request.user, raw_text)
+
+    elif form.is_valid():
         if article_id:
             form.save()
         else:
@@ -71,6 +77,7 @@ def save_article(request, article_id=None):
         'article_form': form,
         'article_id': article_id,
         'page_type': 'article',
+        'compiled_text': compiled_text,
     })
 
 @login_required
