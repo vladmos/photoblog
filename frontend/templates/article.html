@@ -1,6 +1,6 @@
 {% extends "frontend_base.html" %}
 
-{% block title %}wat{% endblock %}
+{% block title %}{{ user.profile.public_name }}: {{ article.name }}{% endblock %}
 
 {% block content %}
     <div class="page-header">
