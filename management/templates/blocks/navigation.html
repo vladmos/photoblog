@@ -11,7 +11,7 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        {% if user.albums %}
+                        {% if user.albums.all %}
                             <li><a href="{% url management:photoalbums %}">
                                 <i class="icon-list-alt"></i>
                                 All photoalbums
@@ -31,7 +31,7 @@
                         </a></li>
                     </ul>
                 </li>
-                {% if user.articles or user.albums %}
+                {% if user.articles.all or user.albums.all %}
                     <li class="dropdown {% if page_type == "article" %}active{% endif %}">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
                             Articles
@@ -51,8 +51,8 @@
                                     </a></li>
                                 {% endfor %}
                             {% endif %}
-                            {% if user.albums %}
-                                {% if user.articles %}
+                            {% if user.albums.all %}
+                                {% if user.articles.all %}
                                     <li class="divider"></li>
                                 {% endif %}
                                 <li><a href="{% url management:new_article %}">

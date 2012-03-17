@@ -50,7 +50,7 @@ class UserForm(forms.ModelForm, BootstrapForm):
 class UserProfileForm(forms.ModelForm, BootstrapForm):
     class Meta:
         model = UserProfile
-        fields = ['custom_hostname']
+        fields = ['personal_url', 'custom_hostname']
 
 class CustomPasswordChangeForm(PasswordChangeForm, BootstrapForm):
     pass
