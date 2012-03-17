@@ -29,9 +29,13 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            {% for article in user.articles.all %}
-                                <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
-                            {% endfor %}
+                            {% if user.articles.all %}
+                                <li><a href="{% url management:articles %}">Manage articles</a></li>
+                                <li class="divider"></li>
+                                {% for article in user.articles.all %}
+                                    <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
+                                {% endfor %}
+                            {% endif %}
                             {% if user.albums %}
                                 {% if user.articles %}
                                     <li class="divider"></li>

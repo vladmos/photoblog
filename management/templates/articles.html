@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Photoblog™ — My articles
+{% endblock %}
+
+{% block header %}
+My articles
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span4">
+            <ul>
+                {% for article in user.articles.all %}
+                    <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
