@@ -14,7 +14,7 @@ class Article(models.Model):
     def __unicode__(self):
         return u'%s: %s' % (
             self.user.username,
-            self.name,1
+            self.name,
         )
 
     class Meta:
