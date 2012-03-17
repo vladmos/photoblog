@@ -1,0 +1,32 @@
+.form-big input[type=text],
+.form-big textarea
+{
+    width: 700px;
+}
+
+.form-big textarea
+{
+    height: 300px;
+}
+
+.vertical-thumbnails
+{
+    height: 500px;
+    overflow: auto;
+}
+
+.vertical-thumbnails .thumbnail
+{
+    background-color: #ddd;
+}
+
+.vertical-thumbnails .thumbnail:hover
+{
+    background-color: #fafafa;
+    cursor: pointer;
+}
+
+.photoalbum tr td
+{
+    padding: 10px;
+}

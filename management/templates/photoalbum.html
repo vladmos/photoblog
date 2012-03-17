@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load template_extra %}
+
 {% block title %}
 Photoblog™ — photoalbum “{{ photoalbum.name }}”
 {% endblock %}
@@ -10,18 +12,21 @@ Photoalbum “{{ photoalbum.name }}”
 {% endblock %}
 
 {% block content %}
-    <ul class="thumbnails">
-        {% for photo in photoalbum.photos.all %}
-            <li class="span2">
-                <div class="thumbnail">
-                    <a href="{{ photo.page_url }}" target="_blank">
-                        <img src="{{ photo.thumbnail_url }}" alt="{{ photo.picasa_id }}">
-                    </a>
-                    {% if photo.description %}
-                        <p>{{ photo.description }}</p>
-                    {% endif %}
-                </div>
-            </li>
+    <table class="thumbnails photoalbum">
+        {% for photos_group in photoalbum.photos.all|group:6 %}
+            <tr>
+                {% for photo in photos_group %}
+                    <td>
+                        <a href="{{ photo.page_url }}" target="_blank">
+                            <img src="{{ photo.thumbnail_url }}" alt="{{ photo.picasa_id }}">
+                        </a>
+                        {% if photo.description %}
+                            <p>{{ photo.description }}</p>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
+
 {% endblock %}

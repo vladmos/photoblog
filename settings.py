@@ -1,3 +1,5 @@
+from django.contrib.messages import constants as messages
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -84,6 +86,7 @@ INSTALLED_APPS = (
     'personal',
     'picasa',
     'management',
+    'frontend',
 )
 
 AUTH_PROFILE_MODULE = 'personal.UserProfile'
@@ -110,6 +113,14 @@ LOGGING = {
 
 PICASA_SCOPE = 'https://picasaweb.google.com/data/'
 GOOGLE_TOKEN_MANAGEMENT_URL = 'https://accounts.google.com/b/0/IssuedAuthSubTokens'
+
+MESSAGE_TAGS = {
+    messages.INFO: 'alert-info',
+    messages.ERROR: 'alert-error',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: '',
+}
+
 
 from secret_settings import *
 # SECRET_KEY

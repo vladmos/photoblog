@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Photoblog™ —
+    {% if article_id %}
+        article “{{ article.name }}”
+    {% else %}
+        New article
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% if article_id %}
+        Article “{{ article.name }}”
+        <small>{{ article.slug }}</small>
+    {% else %}
+        New article
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span10">
+            <form method="POST" action="{% if article_id %}{% url management:save_article article_id %}{% else %}{% url management:save_article %}{% endif %}" class="form-big">
+                {% csrf_token %}
+                {{ article_form.as_bootstrap }}
+                <input class="btn btn-primary" type="submit" value="Save article" />
+                <input class="btn" type="submit" value="Preview" />
+            </form>
+        </div>
+        <div class="span2">
+            <div class="row">
+                <div class="dropdown" id="photoalbum-select">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="dropdown-caption">Photoalbums</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for album in user.albums.all %}
+                            <li><a href="#" id="{% url management:preview_photoalbum album.id %}">{{ album.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div><br/>
+            </div>
+            <div class="row">
+                <ul class="thumbnails vertical-thumbnails" id="photoalbum-preview">
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
