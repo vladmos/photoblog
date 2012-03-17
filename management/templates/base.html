@@ -24,10 +24,10 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        {% if photoalbums %}
+                        {% if user.albums %}
                             <li><a href="{% url management:photoalbums %}">Manage photoalbums</a></li>
                             <li class="divider"></li>
-                            {% for photoalbum in photoalbums %}
+                            {% for photoalbum in user.albums.all %}
                                 <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
                             {% endfor %}
                             <li class="divider"></li>

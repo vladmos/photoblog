@@ -12,7 +12,7 @@ My photoalbums
     <div class="row">
         <div class="span4">
             <ul>
-                {% for photoalbum in photoalbums %}
+                {% for photoalbum in user.albums.all %}
                     <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
                 {% endfor %}
             </ul>

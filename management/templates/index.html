@@ -15,9 +15,9 @@ Photoblog administration
                     Your photoalbums have been scheduled to be imported shortly.
                 </div>
             {% endif %}
-            {% if photoalbums %}
+            {% if user.albums.all %}
                 <ul>
-                    {% for photoalbum in photoalbums %}
+                    {% for photoalbum in user.albums.all %}
                         <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
                     {% endfor %}
                 </ul>
