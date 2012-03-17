@@ -1,5 +1,3 @@
-import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,7 +9,12 @@ class Article(models.Model):
     slug = models.SlugField(max_length=100)
     raw_text = models.TextField()
     compiled_text = models.TextField()
-    created = models.DateField(default=datetime.datetime.now)
+    event_beginning = models.DateField(verbose_name=u'Event started')
+    event_end = models.DateField(verbose_name=u'Event finished')
+    is_published = models.BooleanField(verbose_name=u'Published')
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         self.compiled_text = compile_article(self.user, self.raw_text)
@@ -25,4 +28,4 @@ class Article(models.Model):
 
     class Meta:
         unique_together = ('slug', 'user')
-        ordering = ['created']
+        ordering = ['event_end']

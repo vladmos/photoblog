@@ -7,7 +7,7 @@
         <div class="span12">
             {% if user.articles.all %}
                 <ul>
-                    {% for article in user.articles.all %}
+                    {% for article in articles %}
                         <li><a href="{% url frontend:article user.username article.slug %}">{{ article.name }}</a></li>
                     {% endfor %}
                 </ul>

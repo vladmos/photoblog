@@ -20,6 +20,7 @@ DATABASES = {
 
 TIME_ZONE = 'Europe/Moscow'
 LANGUAGE_CODE = 'en-us'
+DATE_INPUT_FORMATS = ['%d.%m.%Y']
 
 SITE_ID = 1
 USE_I18N = False

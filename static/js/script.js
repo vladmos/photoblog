@@ -38,6 +38,21 @@ function initArticleEditor() {
         selectAlbum($menu_item);
     });
 
+    var dates = $('#id_event_beginning, #id_event_end').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        dateFormat: 'dd.mm.yy',
+        onSelect: function(selectedDate) {
+            var option = this.id == "id_event_beginning" ? "minDate" : "maxDate",
+                instance = $(this).data("datepicker"),
+                date = $.datepicker.parseDate(
+                    instance.settings.dateFormat ||
+                        $.datepicker._defaults.dateFormat,
+                    selectedDate, instance.settings );
+            dates.not(this).datepicker("option", option, date);
+        }
+    });
+
     var selectAlbum = function($menu_item) {
         $.ajax({
             url: $menu_item[0].id,

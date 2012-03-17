@@ -22,6 +22,7 @@ class PicasaAlbum(models.Model):
 
     class Meta:
         unique_together = ('picasa_id', 'user')
+        ordering = ['picasa_id']
 
 
 class PicasaPhoto(models.Model):
@@ -43,3 +44,4 @@ class PicasaPhoto(models.Model):
 
     class Meta:
         unique_together = ('picasa_id', 'album')
+        ordering = ['picasa_id']

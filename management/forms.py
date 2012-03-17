@@ -36,21 +36,24 @@ class BootstrapForm(BaseForm):
 
 
 class ArticleForm(forms.ModelForm, BootstrapForm):
+    event_beginning = forms.DateField(input_formats=['%d.%m.%Y'], label=u'Event beginning')
+    event_end = forms.DateField(input_formats=['%d.%m.%Y'], label=u'Event end')
     class Meta:
         model = Article
-        fields = ['name', 'slug', 'raw_text', 'created']
+        fields = ['name', 'slug', 'raw_text', 'event_beginning', 'event_end', 'is_published']
 
 
 class UserForm(forms.ModelForm, BootstrapForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['email']
 
 
 class UserProfileForm(forms.ModelForm, BootstrapForm):
     class Meta:
         model = UserProfile
-        fields = ['personal_url', 'custom_hostname']
+        fields = ['public_name', 'personal_url', 'custom_hostname']
+
 
 class CustomPasswordChangeForm(PasswordChangeForm, BootstrapForm):
     pass
