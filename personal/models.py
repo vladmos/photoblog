@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     is_valid_token = models.BooleanField(default=False)
     oauth_token = models.CharField(max_length=255, null=True)
 
-    personal_url = models.URLField(blank=True, null=True)
+    personal_url = models.URLField(blank=True, null=True, verbose_name=u'Personal website')
 
     custom_hostname = models.CharField(
         max_length=50,
