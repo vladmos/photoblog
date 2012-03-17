@@ -6,11 +6,13 @@
     <div class="page-header">
         <h1>
             {{ article.name }}
-            <small>{{ article.created|date:"d.m.Y" }}</small>
+            <small>
+                {{ article.event_date_human }}
+            </small>
         </h1>
     </div>
     <div class="row">
-        <div class="span12">
+        <div class="span12 frontend-article">
             {{ article.compiled_text|safe }}
         </div>
     </div>

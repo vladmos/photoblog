@@ -5,13 +5,15 @@
 {% block content %}
     <div class="row">
         <div class="span12">
-            {% if user.articles.all %}
+            {% regroup articles by event_end.year as article_list %}
+            {% for year in article_list %}
+                <h6>{{ year.grouper }}</h6>
                 <ul>
-                    {% for article in articles %}
+                    {% for article in year.list %}
                         <li><a href="{% url frontend:article user.username article.slug %}">{{ article.name }}</a></li>
                     {% endfor %}
                 </ul>
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
 
