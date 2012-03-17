@@ -70,9 +70,10 @@ function initArticleEditor() {
 
     var initPhotos = function($preview) {
         var $textarea = $('#id_raw_text');
+        $preview.undelegate('.thumbnail img', 'click');
         $preview.delegate('.thumbnail img', 'click', function(event) {
             var $this = $(this),
-                photo_tag = '{{' + $this[0].id + '}}';
+                photo_tag = '[' + $this[0].id + ']';
             $textarea.insertAtCaret(photo_tag);
             $textarea.focus();
         })

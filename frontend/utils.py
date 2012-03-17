@@ -11,7 +11,7 @@ def response(request, template, context=None):
     context = context or {}
     return render_to_response(template, context, context_instance=RequestContext(request))
 
-PHOTO_RE = re.compile(r'\{\{photo_(?P<photo_id>\d+)\}\}')
+PHOTO_RE = re.compile(r'\[photo_(?P<photo_id>\d+)\]')
 
 def _photo_tag(user, matching):
     photo_id = matching.group('photo_id')
