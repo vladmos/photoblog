@@ -1,4 +1,8 @@
+import os
+
 from django.contrib.messages import constants as messages
+
+_project_root = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -34,7 +38,7 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
-    '/Users/vladmos/code/photoblog/static',
+    os.path.join(_project_root, 'static'),
 )
 
 STATICFILES_FINDERS = (
@@ -126,4 +130,4 @@ MESSAGE_TAGS = {
 
 from secret_settings import *
 # SECRET_KEY
-# ADMIN
+# ADMINS
