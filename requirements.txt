@@ -1,3 +1,4 @@
 django
 gdata
 markdown2
+south
