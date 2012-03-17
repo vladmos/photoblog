@@ -18,6 +18,12 @@
     {% endif %}
 {% endblock %}
 
+{% block custom_scripts %}
+    <script type="text/javascript">
+        $(document).ready(initArticleEditor);
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="span10">

@@ -1,9 +1,7 @@
-<ul class="thumbnails vertical-thumbnails">
-    {% for photo in photoalbum.photos.all %}
-        <li class="span2">
-            <div class="thumbnail">
-                <img src="{{ photo.thumbnail_url }}"/>
-            </div>
-        </li>
-    {% endfor %}
-</ul>
+{% for photo in photoalbum.photos.all %}
+    <li class="span2">
+        <div class="thumbnail">
+            <img src="{{ photo.thumbnail_url }}" id="photo_{{ photo.id }}"/>
+        </div>
+    </li>
+{% endfor %}

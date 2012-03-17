@@ -1,5 +1,35 @@
 $(document).ready(function() {
     $('.dropdown-toggle').dropdown();
+});
+
+function initArticleEditor() {
+    jQuery.fn.extend({
+        insertAtCaret: function(myValue){
+            return this.each(function(i) {
+                if (document.selection) {
+                    //For browsers like Internet Explorer
+                    this.focus();
+                    sel = document.selection.createRange();
+                    sel.text = myValue;
+                    this.focus();
+                }
+                else if (this.selectionStart || this.selectionStart == '0') {
+                    //For browsers like Firefox and Webkit based
+                    var startPos = this.selectionStart;
+                    var endPos = this.selectionEnd;
+                    var scrollTop = this.scrollTop;
+                    this.value = this.value.substring(0, startPos)+myValue+this.value.substring(endPos,this.value.length);
+                    this.focus();
+                    this.selectionStart = startPos + myValue.length;
+                    this.selectionEnd = startPos + myValue.length;
+                    this.scrollTop = scrollTop;
+                } else {
+                    this.value += myValue;
+                    this.focus();
+                }
+            })
+        }
+    });
 
     var $menu = $('#photoalbum-select .dropdown-menu');
 
@@ -8,24 +38,28 @@ $(document).ready(function() {
         selectAlbum($menu_item);
     });
 
-    /*
-    var $first = $('a', $menu.children(':first-child'));
-
-    if ($first) {
-        $first.click();
-    }
-    */
-
-    function selectAlbum($menu_item) {
-        console.log($menu_item);
+    var selectAlbum = function($menu_item) {
         $.ajax({
             url: $menu_item[0].id,
             success: function(data) {
+                var $preview = $('#photoalbum-preview');
+
                 $('#photoalbum-select .dropdown-caption').html($menu_item.html());
                 $menu_item.parent().parent().children().removeClass('active');
                 $menu_item.parent().addClass('active');
-                $('#photoalbum-preview').html(data);
+                $preview.html(data);
+                initPhotos($preview);
             }
         })
-    }
-});
+    };
+
+    var initPhotos = function($preview) {
+        var $textarea = $('#id_raw_text');
+        $preview.delegate('.thumbnail img', 'click', function(event) {
+            var $this = $(this),
+                photo_tag = '{{' + $this[0].id + '}}';
+            $textarea.insertAtCaret(photo_tag);
+            $textarea.focus();
+        })
+    };
+}
