@@ -23,6 +23,8 @@ def _update_photos(picasa_album, photos):
         picasa_photo.photo_url = photo.media.content[0].url
         picasa_photo.thumbnail_url = photo.media.thumbnail[1].url
         picasa_photo.description = photo.summary.text
+        picasa_photo.width = int(photo.width.text)
+        picasa_photo.height = int(photo.height.text)
         picasa_photo.save()
 
     PicasaPhoto.objects.filter(id__in=obsolete_picasa_photos_id).delete()
@@ -40,7 +42,7 @@ def _update_albums(picasa_service, user, albums):
             picasa_album = PicasaAlbum(picasa_id=album.gphoto_id.text)
 
         picasa_album.user = user
-        picasa_album.name = album.name.text
+        picasa_album.name = album.title.text
         picasa_album.is_public = (album.access.text == 'public')
         picasa_album.save()
 

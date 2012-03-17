@@ -18,6 +18,8 @@ class PicasaPhoto(models.Model):
     photo_url = models.URLField()
     thumbnail_url = models.URLField()
     description = models.TextField(null=True)
+    width = models.IntegerField()
+    height = models.IntegerField()
 
     class Meta:
         unique_together = ('picasa_id', 'album')
