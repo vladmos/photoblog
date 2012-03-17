@@ -1,6 +1,7 @@
 import os
 
 from django.contrib.messages import constants as messages
+import djcelery
 
 _project_root = os.path.abspath(os.path.dirname(__file__))
 
@@ -88,6 +89,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'djcelery',
     'south',
     'personal',
     'picasa',
@@ -127,6 +129,7 @@ MESSAGE_TAGS = {
     messages.WARNING: '',
 }
 
+djcelery.setup_loader()
 
 from secret_settings import *
 # SECRET_KEY

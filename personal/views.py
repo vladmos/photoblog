@@ -8,6 +8,8 @@ import gdata.auth
 import gdata.photos.service
 from gdata.service import NonAuthSubToken
 
+from picasa.async import async_fetch_albums
+
 @login_required
 def login(request):
     if request.method != 'POST':
@@ -41,5 +43,7 @@ def endpoint(request):
         profile.is_valid_token = True
         profile.save()
 
-    messages.add_message(request, messages.SUCCESS, 'Your photoalbums have been scheduled to be imported shortly.')
+        async_fetch_albums.delay()
+        messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported shortly.')
+
     return redirect('management:index')

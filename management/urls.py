@@ -29,5 +29,6 @@ urlpatterns = patterns('',
 
     url(r'^ajax/album/(?P<photoalbum_id>\d+)/$', views.preview_photoalbum, name='preview_photoalbum'),
 
+    url(r'^update_albums/$', views.update_albums, name='update_albums'),
 )
 

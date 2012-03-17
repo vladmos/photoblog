@@ -9,6 +9,8 @@ from picasa.models import PicasaAlbum
 from frontend.models import Article
 from frontend.utils import compile_article
 
+from picasa.async import async_fetch_albums
+
 @login_required
 def index(request):
     return response(request, 'index.html', {
@@ -138,3 +140,9 @@ def change_settings(request):
         'google_token_management_url': settings.GOOGLE_TOKEN_MANAGEMENT_URL,
         'page_type': 'settings',
     })
+
+@login_required
+def update_albums(request):
+    async_fetch_albums.delay()
+    messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported shortly.')
+    return redirect('management:index')
