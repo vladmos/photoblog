@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib import messages
 
 import gdata.auth
 import gdata.photos.service
@@ -40,4 +41,5 @@ def endpoint(request):
         profile.is_valid_token = True
         profile.save()
 
+    messages.add_message(request, messages.SUCCESS, 'Your photoalbums have been scheduled to be imported shortly.')
     return redirect('management:index')

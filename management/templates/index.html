@@ -11,9 +11,11 @@ Photoblog administration
             {% if not user.profile.is_valid_token %}
                 {% include "blocks/oauth-required.html" %}
             {% else %}
-                <div class="alert alert-success">
-                    Your photoalbums have been scheduled to be imported shortly.
-                </div>
+                {% if not user.albums.all %}
+                    <div class="alert alert-info">
+                        You don't have any albums imported from Picasa yet.
+                    </div>
+                {% endif %}
             {% endif %}
             {% if user.albums.all %}
                 <ul>
@@ -25,16 +27,22 @@ Photoblog administration
         </div>
         <div class="span5 offset2">
             <h2>Articles</h2>
-            {% if not articles %}
+            {% if user.articles.all %}
+                <ul>
+                    {% for article in user.articles.all %}
+                        <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
                 <div class="alert alert-info">
                     You don't have any articles yet.
-                    {% if not photoalbums %}
+                    {% if not user.albums.all %}
                         To create one you need to import at least one photoalbum from Picasa.
                     {% endif %}
                 </div>
             {% endif %}
-            {% if photoalbums %}
-                <a class="btn btn-inverse">Create an article</a>
+            {% if user.albums.all %}
+                <a href="{% url management:new_article %}" class="btn btn-inverse">Create an article</a>
             {% endif %}
         </div>
     </div>
