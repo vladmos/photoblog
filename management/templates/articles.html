@@ -10,12 +10,23 @@ My articles
 
 {% block content %}
     <div class="row">
-        <div class="span4">
-            <ul>
+        <div class="span12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Slug</th>
+                        <th>Published</th>
+                    </tr>
+                </thead>
                 {% for article in user.articles.all %}
-                    <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
+                    <tr>
+                        <td><a href="{% url management:article article.id %}">{{ article.name }}</a></td>
+                        <td>{{ article.slug }}</td>
+                        <td>{% if article.is_published %}✔{% else %}✘{% endif %}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     </div>
 
