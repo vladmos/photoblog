@@ -1,0 +1,18 @@
+{% extends "frontend_base.html" %}
+
+{% block title %}wat{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {{ article.name }}
+            <small>{{ article.created|date:"d.m.Y" }}</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span12">
+            {{ article.compiled_text|safe }}
+        </div>
+    </div>
+
+{% endblock %}

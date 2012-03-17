@@ -3,6 +3,8 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
+from utils import compile_article
+
 class Article(models.Model):
     user = models.ForeignKey(User, related_name='articles')
     name = models.CharField(max_length=255)
@@ -10,6 +12,10 @@ class Article(models.Model):
     raw_text = models.TextField()
     compiled_text = models.TextField()
     created = models.DateField(default=datetime.datetime.now)
+
+    def save(self, *args, **kwargs):
+        self.compiled_text = compile_article(self.user, self.raw_text)
+        super(Article, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u'%s: %s' % (

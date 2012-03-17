@@ -38,7 +38,7 @@ def view_article(request, article_id=None):
     else:
         form = ArticleForm()
 
-    return response(request, 'article.html', {
+    return response(request, 'edit_article.html', {
         'article': article,
         'article_id': article_id,
         'article_form': form,
@@ -66,7 +66,7 @@ def save_article(request, article_id=None):
         messages.add_message(request, messages.SUCCESS, 'The article is saved.')
         return redirect('management:article', article_id=article_id)
 
-    return response(request, 'article.html', {
+    return response(request, 'edit_article.html', {
         'article': article,
         'article_form': form,
         'article_id': article_id,

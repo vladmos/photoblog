@@ -1,0 +1,18 @@
+{% extends "frontend_base.html" %}
+
+{% block title %}wat{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span12">
+            {% if user.articles.all %}
+                <ul>
+                    {% for article in user.articles.all %}
+                        <li><a href="{% url frontend:article user.username article.slug %}">{{ article.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     
     (r'^oauth/', include('personal.urls', namespace='personal')),
     (r'^admin/', include('management.urls', namespace='management')),
+    (r'^', include('frontend.urls', namespace='frontend')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
