@@ -21,7 +21,11 @@ def _photo_tag(user, matching):
     except PicasaPhoto.DoesNotExist:
         return u''
 
-    return u'<img src="%s" />' % photo.photo_url
+    url = photo.photo_url
+    last_slash_index = url.rfind('/')
+    url = url[:last_slash_index] + '/s900' + url[last_slash_index:]
+
+    return u'<img src="%s" />' % url
 
 def compile_article(owner, text):
     text = markdown(text)
