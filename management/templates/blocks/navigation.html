@@ -5,48 +5,65 @@
                 Photoblog™
             </a>
             <ul class="nav">
-                <li class="dropdown">
+                <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
                         Photoalbums
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         {% if user.albums %}
-                            <li><a href="{% url management:photoalbums %}">Manage photoalbums</a></li>
+                            <li><a href="{% url management:photoalbums %}">
+                                <i class="icon-list-alt"></i>
+                                All photoalbums
+                            </a></li>
                             <li class="divider"></li>
                             {% for photoalbum in user.albums.all %}
-                                <li><a href="{% url management:photoalbum photoalbum.id %}">{{ photoalbum.name }}</a></li>
+                                <li><a href="{% url management:photoalbum photoalbum.id %}">
+                                    <i class="icon-camera"></i>
+                                    {{ photoalbum.name }}
+                                </a></li>
                             {% endfor %}
                             <li class="divider"></li>
                         {% endif %}
-                        <li><a href="">Fetch albums</a></li>
+                        <li><a href="">
+                            <i class="icon-refresh"></i>
+                            Fetch albums
+                        </a></li>
                     </ul>
                 </li>
                 {% if user.articles or user.albums %}
-                    <li class="dropdown">
+                    <li class="dropdown {% if page_type == "article" %}active{% endif %}">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
                             Articles
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.articles.all %}
-                                <li><a href="{% url management:articles %}">Manage articles</a></li>
+                                <li><a href="{% url management:articles %}">
+                                    <i class="icon-list-alt"></i>
+                                    All articles
+                                </a></li>
                                 <li class="divider"></li>
                                 {% for article in user.articles.all %}
-                                    <li><a href="{% url management:article article.id %}">{{ article.name }}</a></li>
+                                    <li><a href="{% url management:article article.id %}">
+                                        <i class="icon-file"></i>
+                                        {{ article.name }}
+                                    </a></li>
                                 {% endfor %}
                             {% endif %}
                             {% if user.albums %}
                                 {% if user.articles %}
                                     <li class="divider"></li>
                                 {% endif %}
-                                <li><a href="{% url management:new_article %}">New article</a></li>
+                                <li><a href="{% url management:new_article %}">
+                                    <i class="icon-pencil"></i>
+                                    New article
+                                </a></li>
                             {% endif %}
                         </ul>
                     </li>
                 {% endif %}
-                <li class="active"><a href="">Personal info</a></li>
-                <li><a href="">Layout settings</a></li>
+                <li {% if page_type == "settings" %}class="active"{% endif %}><a href="{% url management:settings %}">Settings</a></li>
             </ul>
 
             <ul class="nav pull-right">

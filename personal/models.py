@@ -11,7 +11,15 @@ class UserProfile(models.Model):
     is_valid_token = models.BooleanField(default=False)
     oauth_token = models.CharField(max_length=255, null=True)
 
-    custom_hostname = models.CharField(max_length=50, validators=[HostnameValidator()], blank=True)
+    personal_url = models.URLField(blank=True, null=True)
+
+    custom_hostname = models.CharField(
+        max_length=50,
+        validators=[HostnameValidator()],
+        blank=True,
+        help_text=u'For alternative photoblog address. Must be set at DNS server and the webserver to work properly.',
+        unique=True,
+    )
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

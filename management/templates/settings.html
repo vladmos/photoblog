@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+Photoblog™ — Settings
+{% endblock %}
+
+{% block header %}
+Settings
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6">
+            <div class="p">
+                <form class="form-horizontal" method="POST" action="{% url management:change_settings %}">
+                    {% csrf_token %}
+                    {{ user_form.as_bootstrap }}
+                    {{ user_profile_form.as_bootstrap }}
+                    <div class="control-group ">
+                        <div class="controls">
+                            <input class="btn btn-primary" type="submit" value="Save"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="p">
+                <form class="form-horizontal" method="POST" action="{% url management:change_password %}">
+                    {% csrf_token %}
+                    {{ password_change_form.as_bootstrap }}
+                    <div class="control-group ">
+                        <div class="controls">
+                            <input class="btn btn-primary" type="submit" value="Change password"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="span4 offset2">
+            {% if user.profile.is_valid_token %}
+                <div class="alert alert-success">
+                    <strong>Your oAuth token is active.</strong>
+                </div>
+            {% else %}
+                <div class="alert alert-error">
+                    <strong>You need to set up new oAuth token.</strong>
+                </div>
+            {% endif %}
+
+            <p>
+                Photoblog™ uses oAuth authorization/authentication in Picasa service, it means that we don't have your
+                Google password, we have access only to your Picasa photoalbums, and you can invalidate the token we
+                have any time at <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
+            </p>
+
+            <form method="POST" action="{% url personal:oauth_login %}">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-warning btn-large" value="Create new oAuth token" />
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
