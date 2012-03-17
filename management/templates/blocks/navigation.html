@@ -4,33 +4,37 @@
             <a class="brand" href="{% url management:index %}">
                 Photoblog™
             </a>
-            <ul class="nav">
-                <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                        Photoalbums
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% if user.albums.all %}
-                            <li><a href="{% url management:photoalbums %}">
-                                <i class="icon-list-alt"></i>
-                                All photoalbums
-                            </a></li>
-                            <li class="divider"></li>
-                            {% for photoalbum in user.albums.all %}
-                                <li><a href="{% url management:photoalbum photoalbum.id %}">
-                                    <i class="icon-camera"></i>
-                                    {{ photoalbum.name }}
+            {% if user.profile.is_valid_token or user.albums.all %}
+                <ul class="nav">
+                    <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            Photoalbums
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if user.albums.all %}
+                                <li><a href="{% url management:photoalbums %}">
+                                    <i class="icon-list-alt"></i>
+                                    All photoalbums
                                 </a></li>
-                            {% endfor %}
-                            <li class="divider"></li>
-                        {% endif %}
-                        <li><a href="{% url management:update_albums %}">
-                            <i class="icon-refresh"></i>
-                            Fetch albums
-                        </a></li>
-                    </ul>
-                </li>
+                                <li class="divider"></li>
+                                {% for photoalbum in user.albums.all %}
+                                    <li><a href="{% url management:photoalbum photoalbum.id %}">
+                                        <i class="icon-camera"></i>
+                                        {{ photoalbum.name }}
+                                    </a></li>
+                                {% endfor %}
+                                <li class="divider"></li>
+                            {% endif %}
+                            {% if user.profile.is_valid_token %}
+                                <li><a href="{% url management:update_albums %}">
+                                    <i class="icon-refresh"></i>
+                                    Fetch albums
+                                </a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
                 {% if user.articles.all or user.albums.all %}
                     <li class="dropdown {% if page_type == "article" %}active{% endif %}">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
