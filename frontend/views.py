@@ -8,7 +8,7 @@ from utils import response
 def index(request):
     return HttpResponse('index!')
 
-def user_articles(request, username):
+def blog(request, username):
     user = get_object_or_404(User, username=username)
 
     return response(request, 'blog.html', {

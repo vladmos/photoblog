@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.urlresolvers import reverse
 
 from utils import HostnameValidator
 
@@ -20,6 +21,11 @@ class UserProfile(models.Model):
         help_text=u'For alternative photoblog address. Must be set at DNS server and the webserver to work properly.',
         unique=True,
     )
+
+    def get_blog_url(self):
+        if self.custom_hostname:
+            return u'http://%s/' % self.custom_hostname
+        return reverse('frontend:blog', args=[self.user.username])
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

@@ -5,7 +5,7 @@ import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^~(?P<username>\w+)/$', views.user_articles, name='user_articles'),
+    url(r'^~(?P<username>\w+)/$', views.blog, name='blog'),
     url(r'^~(?P<username>\w+)/(?P<article_slug>[\w\-]+)/$', views.view_article, name='article'),
 )
 
