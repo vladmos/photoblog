@@ -43,7 +43,8 @@ def _update_albums(picasa_service, user, albums):
 
         picasa_album.user = user
         picasa_album.name = album.title.text
-        picasa_album.is_public = (album.access.text == 'public')
+        picasa_album.access_type = album.access.text
+        picasa_album.album_url = album.link[1].href
         picasa_album.save()
 
         photos_uri = album.GetPhotosUri()
