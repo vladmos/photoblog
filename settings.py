@@ -111,7 +111,7 @@ LOGGING = {
     },
 }
 
-PICASA_SCOPE = 'https://picasaweb.google.com/data/'
+PICASA_SCOPE = 'https://picasaweb.google.com/data/feed/'
 GOOGLE_TOKEN_MANAGEMENT_URL = 'https://accounts.google.com/b/0/IssuedAuthSubTokens'
 
 MESSAGE_TAGS = {
