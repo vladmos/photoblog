@@ -4,8 +4,8 @@
             <a class="brand" href="{% url management:index %}">
                 Photoblog™
             </a>
-            {% if user.profile.is_valid_token or user.albums.all %}
-                <ul class="nav">
+            <ul class="nav">
+                {% if user.profile.is_valid_token or user.albums.all %}
                     <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
                             Photoalbums
