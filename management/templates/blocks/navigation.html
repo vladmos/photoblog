@@ -7,7 +7,7 @@
             <ul class="nav">
                 {% if user.profile.is_valid_token or user.albums.all %}
                     <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Photoalbums
                             <b class="caret"></b>
                         </a>
@@ -37,7 +37,7 @@
                 {% endif %}
                 {% if user.articles.all or user.albums.all %}
                     <li class="dropdown {% if page_type == "article" %}active{% endif %}">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Articles
                             <b class="caret"></b>
                         </a>
