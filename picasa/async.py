@@ -1,5 +1,4 @@
 from celery.task import task
-from celery.registry import TaskRegistry
 
 from routine import fetch_albums
 

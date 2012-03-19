@@ -16,7 +16,7 @@ def login(request):
         return redirect('management:index')
 
     next = request.build_absolute_uri(reverse('personal:oauth_endpoint'))
-    scope = settings.PICASA_SCOPE
+    scope = ' '.join(settings.PICASA_SCOPES)
     secure = False  # set secure=True to request secure AuthSub tokens
     session = True
     auth_sub_url = gdata.auth.GenerateAuthSubUrl(next, scope, secure=secure, session=session)
@@ -35,7 +35,7 @@ def endpoint(request):
         pass
     else:
         token_store =  picasa_service.token_store
-        token = token_store.find_token(settings.PICASA_SCOPE)
+        token = token_store.find_token(settings.PICASA_SCOPES[0])
         token_string = token.get_token_string()
 
         profile = request.user.get_profile()
@@ -44,6 +44,6 @@ def endpoint(request):
         profile.save()
 
         async_fetch_albums.delay()
-        messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported shortly.')
+        messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported soon.')
 
     return redirect('management:index')

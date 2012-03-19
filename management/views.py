@@ -144,5 +144,5 @@ def change_settings(request):
 @login_required
 def update_albums(request):
     async_fetch_albums.delay()
-    messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported shortly.')
+    messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported soon.')
     return redirect('management:index')
