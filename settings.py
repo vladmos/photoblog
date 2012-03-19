@@ -129,6 +129,10 @@ MESSAGE_TAGS = {
     messages.WARNING: '',
 }
 
+CELERY_IMPORTS = (
+    'picasa.async',
+)
+
 djcelery.setup_loader()
 
 from secret_settings import *
