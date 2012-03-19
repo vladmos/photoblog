@@ -19,13 +19,21 @@
 {% endblock %}
 
 {% block custom_scripts %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/frontend.css" type="text/css" />
+
     <script type="text/javascript">
         $(document).ready(initArticleEditor);
     </script>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a id="tab-edit" href="#">Edit</a>
+        </li>
+        <li><a id="tab-preview" href="#">Preview</a></li>
+    </ul>
+    <div class="row" id="panel-edit">
         <div class="span10">
             <form method="POST" action="{% if article_id %}{% url management:save_article article_id %}{% else %}{% url management:save_article %}{% endif %}" class="form-big">
                 {% csrf_token %}
@@ -54,10 +62,6 @@
             </div>
         </div>
     </div>
-    {% if compiled_text %}
-        <div class="preview">
-            <h2>Preview</h2>
-            {{ compiled_text|safe }}
-        </div>
-    {% endif %}
+    <div id="panel-preview" class="frontend-article">
+    </div>
 {% endblock %}

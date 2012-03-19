@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^article/(?P<article_id>\d+)/save/$', views.save_article, name='save_article'),
 
     url(r'^ajax/album/(?P<photoalbum_id>\d+)/$', views.preview_photoalbum, name='preview_photoalbum'),
+    url(r'^ajax/article/$', views.preview_article, name='preview_article'),
 
     url(r'^update_albums/$', views.update_albums, name='update_albums'),
 )

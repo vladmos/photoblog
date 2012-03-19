@@ -36,7 +36,8 @@
     padding-bottom: 3em;
 }
 
-.preview
+.panel-preview
 {
+    display: none;
     margin-top: 3em;
 }

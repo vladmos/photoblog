@@ -38,6 +38,45 @@ function initArticleEditor() {
         selectAlbum($menu_item);
     });
 
+    var $tab_preview = $('#tab-preview'),
+        $tab_edit = $('#tab-edit'),
+        $panel_preview = $('#panel-preview'),
+        $panel_edit = $('#panel-edit'),
+        $textarea = $('#id_raw_text');
+
+
+    $tab_preview.delegate('', 'click', function() {
+        $tab_preview.parent().addClass('active');
+        $tab_edit.parent().removeClass('active');
+
+        $panel_preview.show();
+        $panel_edit.hide();
+
+        $panel_preview.html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: '/admin/ajax/article/',
+            type: 'post',
+            data: 'text=' + encodeURIComponent($textarea.val()),
+            success: function(text) {
+                console.log(text);
+                $panel_preview.html(text);
+            }
+        });
+
+        return false;
+    });
+
+    $tab_edit.delegate('', 'click', function() {
+        $tab_edit.parent().addClass('active');
+        $tab_preview.parent().removeClass('active');
+
+        $panel_edit.show();
+        $panel_preview.hide();
+
+        return false;
+    });
+
     var dates = $('#id_event_beginning, #id_event_end').datepicker({
         defaultDate: "+1w",
         changeMonth: true,
