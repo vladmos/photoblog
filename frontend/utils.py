@@ -4,6 +4,7 @@ from functools import partial
 from markdown2 import markdown
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.conf import settings
 
 from picasa.models import PicasaPhoto
 
@@ -22,8 +23,10 @@ def _photo_tag(user, matching):
         return u''
 
     url = photo.photo_url
-    last_slash_index = url.rfind('/')
-    url = url[:last_slash_index] + '/s900' + url[last_slash_index:]
+
+    if photo.width >= settings.PHOTO_SIZE or photo.height >= settings.PHOTO_SIZE:
+        last_slash_index = url.rfind('/')
+        url = u'%s/s%s%s' % (url[:last_slash_index], settings.PHOTO_SIZE, url[last_slash_index:])
 
     return u'<img src="%s" />' % url
 

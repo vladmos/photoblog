@@ -119,6 +119,8 @@ LOGGING = {
     },
 }
 
+PHOTO_SIZE = 900
+
 PICASA_SCOPES = (
     'http://picasaweb.google.com/data/feed/',
     'https://picasaweb.google.com/data/feed/',
