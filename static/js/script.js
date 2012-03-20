@@ -44,7 +44,6 @@ function initArticleEditor() {
         $panel_edit = $('#panel-edit'),
         $textarea = $('#id_raw_text');
 
-
     $tab_preview.delegate('', 'click', function() {
         $tab_preview.parent().addClass('active');
         $tab_edit.parent().removeClass('active');
@@ -75,6 +74,10 @@ function initArticleEditor() {
         $panel_preview.hide();
 
         return false;
+    });
+
+    $($panel_edit).delegate('input, textarea', 'focus', function() {
+        $('.alert-success .close').click();
     });
 
     var dates = $('#id_event_beginning, #id_event_end').datepicker({
