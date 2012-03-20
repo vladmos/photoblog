@@ -11,7 +11,7 @@ def index(request):
 def blog(request, username):
     user = get_object_or_404(User, username=username)
     articles = user.articles.filter(is_published=True)
-    years = str(a.event_end.year for a in articles)
+    years = set(a.event_end.year for a in articles)
     years = list(reversed(sorted(years)))
 
     return response(request, 'blog.html', {
