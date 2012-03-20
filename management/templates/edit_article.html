@@ -38,7 +38,11 @@
             <form method="POST" action="{% if article_id %}{% url management:save_article article_id %}{% else %}{% url management:save_article %}{% endif %}" class="form-big">
                 {% csrf_token %}
                 {{ article_form.as_bootstrap }}
-                <input class="btn btn-primary" type="submit" value="Save article" />
+                <input class="btn btn-primary" type="submit" value="Save article" />&nbsp;
+                {% if article.id %}
+                    <input class="btn btn-danger" type="submit" name="delete" value="Delete"
+                           onclick="return confirm('Are you sure? This operation cannot be undone.');"/>
+                {% endif %}
             </form>
         </div>
         <div class="span2">

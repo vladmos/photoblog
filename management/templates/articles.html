@@ -11,22 +11,28 @@ My articles
 {% block content %}
     <div class="row">
         <div class="span12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Article</th>
-                        <th>Slug</th>
-                        <th>Published</th>
-                    </tr>
-                </thead>
-                {% for article in user.articles.all %}
-                    <tr>
-                        <td><a href="{% url management:article article.id %}">{{ article.name }}</a></td>
-                        <td>{{ article.slug }}</td>
-                        <td>{% if article.is_published %}✔{% else %}✘{% endif %}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+            {% if user.articles.all %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th>Slug</th>
+                            <th>Published</th>
+                        </tr>
+                    </thead>
+                    {% for article in user.articles.all %}
+                        <tr>
+                            <td><a href="{% url management:article article.id %}">{{ article.name }}</a></td>
+                            <td>{{ article.slug }}</td>
+                            <td>{% if article.is_published %}✔{% else %}✘{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    You have no articles.
+                </div>
+            {% endif %}
         </div>
     </div>
 

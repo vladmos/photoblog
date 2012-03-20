@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect
@@ -56,6 +57,12 @@ def save_article(request, article_id=None):
     if article_id:
         article = get_object_or_404(Article, id=article_id, user=request.user)
         form = ArticleForm(request.POST, instance=article)
+
+        if 'delete' in request.POST:
+            article.delete()
+            messages.add_message(request, messages.INFO, u'The article “%s” has been deleted.' % article.name)
+            return redirect('management:index')
+
     else:
         form = ArticleForm(request.POST)
 
