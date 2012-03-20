@@ -2,6 +2,10 @@
 
 {% block title %}{{ user.profile.public_name }}{% endblock %}
 
+{% block rss %}
+    <link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% url frontend:rss user.username %}" />
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="span12">

@@ -1,0 +1,18 @@
+{% load rss %}<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>{{ user.profile.public_name }}</title>
+        <link>http://photoblog.fulc.ru{% url frontend:blog user.username %}</link>
+        <description>Photoblog</description>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        {% if last_updated %}<lastBuildDate>{{ last_updated|rss_datetime }}</lastBuildDate>{% endif %}
+        {% for article in articles %}
+            <item>
+                <title>{{ article.name}}</title>
+                <description>{{ article.compiled_text|safe }}</description>
+                <pubDate>{{ article.published|rss_datetime }}</pubDate>
+                <guid isPermaLink="true">http://photoblog.fulc.ru{{ article.get_absolute_url }}</guid>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

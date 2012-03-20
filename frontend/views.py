@@ -30,3 +30,13 @@ def view_article(request, username, article_slug):
         'articles': articles,
         'article': article,
     })
+
+def rss(request, username):
+    user = get_object_or_404(User, username=username)
+    articles = user.articles.filter(is_published=True)[:20]
+
+    return response(request, 'rss.xml', {
+        'user': user,
+        'articles': articles,
+        'last_update': max(a.updated for a in articles) if articles else None,
+    }, mimetype='text/xml')

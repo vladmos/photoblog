@@ -3,3 +3,4 @@ gdata
 markdown2
 south
 django-celery
+pytz

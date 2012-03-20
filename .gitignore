@@ -1,3 +1,4 @@
 *.pyc
 .idea
 secret_settings.py
+db.sql

@@ -8,9 +8,9 @@ from django.conf import settings
 
 from picasa.models import PicasaPhoto
 
-def response(request, template, context=None):
+def response(request, template, context=None, **kwargs):
     context = context or {}
-    return render_to_response(template, context, context_instance=RequestContext(request))
+    return render_to_response(template, context, context_instance=RequestContext(request), **kwargs)
 
 PHOTO_RE = re.compile(r'\[photo_(?P<photo_id>\d+)\]')
 
