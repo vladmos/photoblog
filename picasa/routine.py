@@ -8,7 +8,7 @@ from models import PicasaAlbum, PicasaPhoto
 
 def _update_photos(picasa_album, photos):
     picasa_photos = PicasaPhoto.objects.filter(album=picasa_album)
-    obsolete_picasa_photos_id = {p.id for p in picasa_photos}
+    obsolete_picasa_photos_id = set(p.id for p in picasa_photos)
 
     for photo in photos.entry:
 
@@ -31,7 +31,7 @@ def _update_photos(picasa_album, photos):
 
 def _update_albums(picasa_service, user, albums):
     picasa_albums = PicasaAlbum.objects.filter(user=user)
-    obsolete_picasa_albums_id = {a.id for a in picasa_albums}
+    obsolete_picasa_albums_id = set(a.id for a in picasa_albums)
 
     for album in albums.entry:
 
