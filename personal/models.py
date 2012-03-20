@@ -18,6 +18,7 @@ class UserProfile(models.Model):
         max_length=50,
         validators=[HostnameValidator()],
         blank=True,
+        null=True,
         help_text=u'For alternative photoblog address. Must be set at DNS server and the webserver to work properly.',
         unique=True,
     )
