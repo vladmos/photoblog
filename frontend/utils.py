@@ -12,7 +12,7 @@ def response(request, template, context=None, **kwargs):
     context = context or {}
     return render_to_response(template, context, context_instance=RequestContext(request), **kwargs)
 
-PHOTO_RE = re.compile(r'\[photo_(?P<photo_id>\d+)\]')
+PHOTO_RE = re.compile(r'(?P<photo_tag>\[photo_(?P<photo_id>\d+)\])')
 
 def _photo_tag(user, matching):
     photo_id = matching.group('photo_id')
@@ -30,7 +30,12 @@ def _photo_tag(user, matching):
 
     return u'<img src="%s" />' % url
 
+def _expand_photo(matching):
+    return u'\n\n%s\n\n' % matching.group('photo_tag')
+
 def compile_article(owner, text):
+    text = PHOTO_RE.sub(_expand_photo, text)
+
     text = markdown(text)
 
     insert_photo = partial(_photo_tag, owner)
