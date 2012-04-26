@@ -5,7 +5,7 @@ import djcelery
 
 _project_root = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
@@ -122,6 +122,8 @@ PICASA_SCOPES = (
     'https://picasaweb.google.com/data/feed/',
 )
 
+FORCE_SCRIPT_NAME = '' # Workaround for lighttpd webserver
+
 GOOGLE_TOKEN_MANAGEMENT_URL = 'https://accounts.google.com/b/0/IssuedAuthSubTokens'
 
 MESSAGE_TAGS = {
@@ -131,12 +133,25 @@ MESSAGE_TAGS = {
     messages.WARNING: '',
 }
 
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 CELERY_IMPORTS = (
     'picasa.async',
 )
 
-djcelery.setup_loader()
-
 from secret_settings import *
 # SECRET_KEY
 # ADMINS
+# BROKER_HOST
+# BROKER_BACKEND
+# REDIS_PORT
+# REDIS_HOST
+# BROKER_USER
+# BROKER_PASSWORD
+# BROKER_VHOST
+# REDIS_DB
+# REDIS_CONNECT_RETRY
+# CELERY_SEND_EVENTS
+# CELERY_RESULT_BACKEND
+# CELERY_TASK_RESULT_EXPIRES
+
+djcelery.setup_loader()
