@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-27 17:25+0400\n"
+"POT-Creation-Date: 2012-04-27 17:37+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Vladimir Moskva <m@fulc.ru>\n"
 "Language-Team: Vladimir Moskva <m@fulc.ru>\n"
@@ -78,7 +78,11 @@ msgstr "фотоальбом «%(name)s»"
 
 #: management/templates/edit_article.html:33
 msgid "Edit"
-msgstr "Редактировать"
+msgstr "Редактирование"
+
+#: management/templates/edit_article.html:35
+msgid "Preview"
+msgstr "Предпросмотр"
 
 #: management/templates/edit_article.html:42
 msgid "Save article"
