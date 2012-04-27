@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-27 17:42+0400\n"
+"POT-Creation-Date: 2012-04-27 18:08+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Vladimir Moskva <m@fulc.ru>\n"
 "Language-Team: Vladimir Moskva <m@fulc.ru>\n"
@@ -31,11 +31,11 @@ msgstr "Название в URL"
 msgid "Raw text"
 msgstr "Исходный текст"
 
-#: frontend/models.py:16
+#: frontend/models.py:16 management/forms.py:40
 msgid "Event started"
 msgstr "Начало события"
 
-#: frontend/models.py:17
+#: frontend/models.py:17 management/forms.py:41
 msgid "Event finished"
 msgstr "Конец события"
 
@@ -43,24 +43,24 @@ msgstr "Конец события"
 msgid "Published"
 msgstr "Опубликован"
 
-#: management/views.py:64
+#: management/views.py:65
 #, python-format
 msgid "The article “%s” has been deleted."
 msgstr "Статья «%s» была удалена."
 
-#: management/views.py:79
+#: management/views.py:80
 msgid "The article is saved."
 msgstr "Статья сохранена"
 
-#: management/views.py:118
+#: management/views.py:119
 msgid "Your password has been changed."
 msgstr "Ваш пароль был изменен"
 
-#: management/views.py:137
+#: management/views.py:142
 msgid "Your settings have been changed."
 msgstr "Ваши настройки были изменены"
 
-#: management/views.py:151 personal/views.py:48
+#: management/views.py:156 personal/views.py:48
 msgid "Your photoalbums have been scheduled to be imported soon."
 msgstr "Ваши фотоальбомы будут обновлены в ближайшее время."
 

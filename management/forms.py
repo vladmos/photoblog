@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
+from django.utils.translation import ugettext_lazy as _
 
 from frontend.models import Article
 from personal.models import UserProfile
@@ -36,8 +37,8 @@ class BootstrapForm(BaseForm):
 
 
 class ArticleForm(forms.ModelForm, BootstrapForm):
-    event_beginning = forms.DateField(input_formats=['%d.%m.%Y'], label=u'Event beginning')
-    event_end = forms.DateField(input_formats=['%d.%m.%Y'], label=u'Event end')
+    event_beginning = forms.DateField(input_formats=['%d.%m.%Y'], label=_(u'Event started'))
+    event_end = forms.DateField(input_formats=['%d.%m.%Y'], label=_(u'Event finished'))
     class Meta:
         model = Article
         fields = ['name', 'slug', 'raw_text', 'event_beginning', 'event_end', 'is_published']
