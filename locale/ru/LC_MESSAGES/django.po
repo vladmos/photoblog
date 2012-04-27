@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-27 17:37+0400\n"
+"POT-Creation-Date: 2012-04-27 17:42+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Vladimir Moskva <m@fulc.ru>\n"
 "Language-Team: Vladimir Moskva <m@fulc.ru>\n"
@@ -18,6 +18,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural= (n > 10 && n <= 20) ? 3 : (n % 10 == 1) ? "
 "1 : ((n % 10 >= 2) && (n % 10 <=4)) ? 2 : 3\n"
+
+#: frontend/models.py:12
+msgid "Header"
+msgstr "Заголовок"
+
+#: frontend/models.py:13 management/templates/articles.html:20
+msgid "Name in URL"
+msgstr "Название в URL"
+
+#: frontend/models.py:14
+msgid "Raw text"
+msgstr "Исходный текст"
+
+#: frontend/models.py:16
+msgid "Event started"
+msgstr "Начало события"
+
+#: frontend/models.py:17
+msgid "Event finished"
+msgstr "Конец события"
+
+#: frontend/models.py:18 management/templates/articles.html:21
+msgid "Published"
+msgstr "Опубликован"
 
 #: management/views.py:64
 #, python-format
@@ -48,22 +72,14 @@ msgstr "Мои статьи"
 msgid "Article"
 msgstr "Статья"
 
-#: management/templates/articles.html:20
-msgid "Name in URL"
-msgstr "Название в URL"
-
-#: management/templates/articles.html:21
-msgid "Date published"
-msgstr "Дата публикации"
-
 #: management/templates/articles.html:34
 msgid "You have no articles."
 msgstr "У вас нет статей."
 
 #: management/templates/edit_article.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "article “%(name)s”"
-msgstr "фотоальбом «%(name)s»"
+msgstr "статья «%(name)s»"
 
 #: management/templates/edit_article.html:9
 #: management/templates/edit_article.html:18
@@ -72,9 +88,9 @@ msgid "New article"
 msgstr "Новая статья"
 
 #: management/templates/edit_article.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Article “%(name)s”"
-msgstr "фотоальбом «%(name)s»"
+msgstr "Статья «%(name)s»"
 
 #: management/templates/edit_article.html:33
 msgid "Edit"

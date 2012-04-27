@@ -3,18 +3,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from utils import compile_article
 
 class Article(models.Model):
     user = models.ForeignKey(User, related_name='articles')
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=100)
-    raw_text = models.TextField()
+    name = models.CharField(max_length=255, verbose_name=_(u'Header'))
+    slug = models.SlugField(max_length=100, verbose_name=_(u'Name in URL'))
+    raw_text = models.TextField(verbose_name=_(u'Raw text'))
     compiled_text = models.TextField()
-    event_beginning = models.DateField(verbose_name=u'Event started')
-    event_end = models.DateField(verbose_name=u'Event finished')
-    is_published = models.BooleanField(verbose_name=u'Published')
+    event_beginning = models.DateField(verbose_name=_(u'Event started'))
+    event_end = models.DateField(verbose_name=_(u'Event finished'))
+    is_published = models.BooleanField(verbose_name=_(u'Published'))
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
