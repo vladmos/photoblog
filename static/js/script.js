@@ -36,6 +36,8 @@ function initArticleEditor() {
     $menu.delegate('a', 'click', function(event) {
         var $menu_item = $(this);
         selectAlbum($menu_item);
+        $(this).closest('.dropdown').click();
+        return false;
     });
 
     var $tab_preview = $('#tab-preview'),
@@ -80,6 +82,13 @@ function initArticleEditor() {
         $('.alert-success .close').click();
     });
 
+    $('#photoalbum-preview').delegate('.thumbnail img', 'click', function(event) {
+        var $this = $(this),
+            photo_tag = '[' + $this[0].id + ']';
+        $textarea.insertAtCaret(photo_tag);
+        $textarea.focus();
+    })
+
     var dates = $('#id_event_beginning, #id_event_end').datepicker({
         defaultDate: "+1w",
         changeMonth: true,
@@ -105,19 +114,7 @@ function initArticleEditor() {
                 $menu_item.parent().parent().children().removeClass('active');
                 $menu_item.parent().addClass('active');
                 $preview.html(data);
-                initPhotos($preview);
             }
-        })
-    };
-
-    var initPhotos = function($preview) {
-        var $textarea = $('#id_raw_text');
-        $preview.undelegate('.thumbnail img', 'click');
-        $preview.delegate('.thumbnail img', 'click', function(event) {
-            var $this = $(this),
-                photo_tag = '[' + $this[0].id + ']';
-            $textarea.insertAtCaret(photo_tag);
-            $textarea.focus();
-        })
+        });
     };
 }
