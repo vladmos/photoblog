@@ -15,17 +15,23 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.albums.all %}
-                                <li><a href="{% url management:photoalbums %}">
-                                    <i class="icon-list-alt"></i>
-                                    {% trans "All photoalbums" %}
-                                </a></li>
-                                <li class="divider"></li>
+                                <li>
+                                    <a href="{% url management:photoalbums %}">
+                                        <i class="icon-list-alt"></i>
+                                        {% trans "All photoalbums" %}
+                                    </a>
+                                </li>
+                                {% if user.albums.all %}
+                                    <li class="divider"></li>
+                                {% endif %}
                                 {% for photoalbum in user.albums.all %}
                                     <li><a href="{% url management:photoalbum photoalbum.id %}">
                                         <i class="icon-camera"></i>
                                         {{ photoalbum.name }}
                                     </a></li>
                                 {% endfor %}
+                            {% endif %}
+                            {% if user.albums.all and user.profile.is_valid_token %}
                                 <li class="divider"></li>
                             {% endif %}
                             {% if user.profile.is_valid_token %}
