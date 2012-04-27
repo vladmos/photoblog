@@ -54,7 +54,6 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -82,11 +81,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ROOT_URLCONF = 'urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+TEMPLATE_DIRS = ()
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -144,7 +139,6 @@ MESSAGE_TAGS = {
     messages.WARNING: '',
 }
 
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 CELERY_IMPORTS = (
     'picasa.async',
 )
@@ -152,20 +146,10 @@ CELERY_IMPORTS = (
 from secret_settings import *
 # SECRET_KEY
 # ADMINS
-
 # PICASA_RSA_KEY
+#       Generation: http://code.google.com/apis/gdata/docs/auth/oauth.html#GeneratingKeyCert
+#       Setting up: https://accounts.google.com/ManageDomains
 
-# BROKER_HOST
-# BROKER_BACKEND
-# REDIS_PORT
-# REDIS_HOST
-# BROKER_USER
-# BROKER_PASSWORD
-# BROKER_VHOST
-# REDIS_DB
-# REDIS_CONNECT_RETRY
-# CELERY_SEND_EVENTS
-# CELERY_RESULT_BACKEND
-# CELERY_TASK_RESULT_EXPIRES
+from deploy_settings import *
 
 djcelery.setup_loader()
