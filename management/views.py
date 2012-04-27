@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import ugettext as _
+from django.utils import translation
 
 from utils import response
 from forms import ArticleForm, UserForm, UserProfileForm, CustomPasswordChangeForm
@@ -134,6 +135,10 @@ def change_settings(request):
     if user_form.is_valid() and user_profile_form.is_valid():
         user_form.save()
         user_profile_form.save()
+
+        language_code = user_profile_form.cleaned_data['language']
+        translation.activate(language_code)
+
         messages.add_message(request, messages.SUCCESS, _(u'Your settings have been changed.'))
         return redirect('management:settings')
 
