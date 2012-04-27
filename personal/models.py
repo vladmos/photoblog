@@ -13,6 +13,7 @@ class UserProfile(models.Model):
 
     is_valid_token = models.BooleanField(default=False)
     oauth_token = models.CharField(max_length=255, null=True)
+    oauth_token_secret = models.CharField(max_length=255, null=True)
 
     public_name = models.CharField(max_length=100, verbose_name=_(u'Public name'))
     personal_url = models.URLField(blank=True, null=True, verbose_name=_(u'Personal website'))

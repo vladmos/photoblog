@@ -3,6 +3,7 @@ import gdata.photos.service
 from gdata.photos.service import GooglePhotosException
 
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from models import PicasaAlbum, PicasaPhoto
 
@@ -54,21 +55,25 @@ def _update_albums(picasa_service, user, albums):
     PicasaAlbum.objects.filter(id__in=obsolete_picasa_albums_id).delete()
 
 def fetch_albums():
-    for user in User.objects.filter(profile__oauth_token__isnull=False):
+    for user in User.objects.filter(profile__is_valid_token=True):
         user_profile = user.get_profile()
-        token_string = user_profile.oauth_token
 
-        token = gdata.auth.AuthSubToken()
-        token.set_token_string(token_string)
+        oauth_token = gdata.auth.OAuthToken(key=user_profile.oauth_token,
+            secret=user_profile.oauth_token_secret, scopes=settings.PICASA_SCOPES)
+        oauth_token.oauth_input_params = gdata.auth.OAuthInputParams(gdata.auth.OAuthSignatureMethod.RSA_SHA1,
+            settings.OAUTH_CONSUMER_KEY, rsa_key=settings.OAUTH_RSA_KEY)
 
         picasa_service = gdata.photos.service.PhotosService()
-        picasa_service.SetOAuthToken(token)
+        picasa_service.SetOAuthInputParameters(gdata.auth.OAuthSignatureMethod.RSA_SHA1, settings.OAUTH_CONSUMER_KEY,
+            rsa_key=settings.OAUTH_RSA_KEY)
+
+        picasa_service.SetOAuthToken(oauth_token)
 
         try:
             albums = picasa_service.GetUserFeed()
-
             _update_albums(picasa_service, user, albums)
 
         except GooglePhotosException, e:
-            user.profile.is_valid_token = False
-            user.profile.save()
+            user_profile.is_valid_token = False
+            user_profile.save()
+            pass

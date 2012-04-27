@@ -152,6 +152,9 @@ CELERY_IMPORTS = (
 from secret_settings import *
 # SECRET_KEY
 # ADMINS
+
+# PICASA_RSA_KEY
+
 # BROKER_HOST
 # BROKER_BACKEND
 # REDIS_PORT

@@ -1,3 +1,5 @@
+from urlparse import parse_qs
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -7,40 +9,51 @@ from django.utils.translation import ugettext as _
 
 import gdata.auth
 import gdata.photos.service
-from gdata.service import NonAuthSubToken
 
 from picasa.async import async_fetch_albums
+
+def _get_request_token(request):
+    picasa_service = gdata.photos.service.PhotosService()
+    picasa_service.SetOAuthInputParameters(gdata.auth.OAuthSignatureMethod.RSA_SHA1, settings.OAUTH_CONSUMER_KEY,
+        rsa_key=settings.OAUTH_RSA_KEY)
+    request_token = picasa_service.FetchOAuthRequestToken(settings.PICASA_SCOPES)
+    picasa_service.SetOAuthToken(request_token)
+
+    return picasa_service, request_token
+
 
 @login_required
 def login(request):
     if request.method != 'POST':
         return redirect('management:index')
 
-    next = request.build_absolute_uri(reverse('personal:oauth_endpoint'))
-    scope = ' '.join(settings.PICASA_SCOPES)
-    secure = False  # set secure=True to request secure AuthSub tokens
-    session = True
-    auth_sub_url = gdata.auth.GenerateAuthSubUrl(next, scope, secure=secure, session=session)
-    return redirect(auth_sub_url)
+    callback_url = request.build_absolute_uri(reverse('personal:oauth_endpoint'))
+
+    picasa_service, request_token = _get_request_token(request)
+    authorization_url = picasa_service.GenerateOAuthAuthorizationURL(callback_url=callback_url)
+
+    return redirect(authorization_url)
 
 @login_required
 def endpoint(request):
     absolute_url = request.build_absolute_uri()
 
-    single_use_token = gdata.auth.extract_auth_sub_token_from_url(absolute_url)
-    picasa_service = gdata.photos.service.PhotosService()
+    picasa_service, request_token = _get_request_token(request)
 
-    try:
-        picasa_service.UpgradeToSessionToken(single_use_token)
-    except NonAuthSubToken:
-        pass
-    else:
-        token_store =  picasa_service.token_store
-        token = token_store.find_token(settings.PICASA_SCOPES[0])
-        token_string = token.get_token_string()
+    oauth_token = gdata.auth.OAuthTokenFromUrl(absolute_url)
+    if oauth_token:
+        oauth_token.oauth_input_params = gdata.auth.OAuthInputParams(gdata.auth.OAuthSignatureMethod.RSA_SHA1,
+            settings.OAUTH_CONSUMER_KEY, rsa_key=settings.OAUTH_RSA_KEY)
+
+        picasa_service.SetOAuthToken(oauth_token)
+        access_token = picasa_service.UpgradeToOAuthAccessToken()
+
+        token_string = access_token.get_token_string()
+        token_string_data = parse_qs(token_string)
 
         profile = request.user.get_profile()
-        profile.oauth_token = token_string
+        profile.oauth_token = token_string_data['oauth_token'][0]
+        profile.oauth_token_secret = token_string_data['oauth_token_secret'][0]
         profile.is_valid_token = True
         profile.save()
 
