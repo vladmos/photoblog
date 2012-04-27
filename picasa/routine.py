@@ -70,8 +70,5 @@ def fetch_albums():
             _update_albums(picasa_service, user, albums)
 
         except GooglePhotosException, e:
-            print 'GooglePhotosException: %s' % e
-            print 'Marked token "%s" as inactive' % token_string
-
             user.profile.is_valid_token = False
             user.profile.save()

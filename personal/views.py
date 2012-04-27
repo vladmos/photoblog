@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 
 import gdata.auth
 import gdata.photos.service
@@ -44,6 +45,6 @@ def endpoint(request):
         profile.save()
 
         async_fetch_albums.delay()
-        messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported soon.')
+        messages.add_message(request, messages.INFO, _(u'Your photoalbums have been scheduled to be imported soon.'))
 
     return redirect('management:index')

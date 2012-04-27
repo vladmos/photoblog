@@ -1,20 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
     Photoblog™ —
     {% if article_id %}
-        article “{{ article.name }}”
+        {% blocktrans with name=article.name %}article “{{ name }}”{% endblocktrans %}
     {% else %}
-        New article
+        {% trans "New article" %}
     {% endif %}
 {% endblock %}
 
 {% block header %}
     {% if article_id %}
-        Article “{{ article.name }}”
+        {% blocktrans with name=article.name %}Article “{{ name }}”{% endblocktrans %}
         <small>{{ article.slug }}</small>
     {% else %}
-        New article
+        {% trans "New article" %}
     {% endif %}
 {% endblock %}
 
@@ -29,19 +30,19 @@
 {% block content %}
     <ul class="nav nav-tabs">
         <li class="active">
-            <a id="tab-edit" href="#">Edit</a>
+            <a id="tab-edit" href="#">{% trans "Edit" %}</a>
         </li>
-        <li><a id="tab-preview" href="#">Preview</a></li>
+        <li><a id="tab-preview" href="#">{% trans"Preview" %}</a></li>
     </ul>
     <div class="row" id="panel-edit">
         <div class="span10">
             <form method="POST" action="{% if article_id %}{% url management:save_article article_id %}{% else %}{% url management:save_article %}{% endif %}" class="form-big">
                 {% csrf_token %}
                 {{ article_form.as_bootstrap }}
-                <input class="btn btn-primary" type="submit" value="Save article" />&nbsp;
+                <input class="btn btn-primary" type="submit" value="{% trans "Save article" %}" />&nbsp;
                 {% if article.id %}
-                    <input class="btn btn-danger" type="submit" name="delete" value="Delete"
-                           onclick="return confirm('Are you sure? This operation cannot be undone.');"/>
+                    <input class="btn btn-danger" type="submit" name="delete" value="{% trans "Delete" %}"
+                           onclick="return confirm('{% trans "Are you sure? This operation cannot be undone." %}');"/>
                 {% endif %}
             </form>
         </div>
@@ -49,7 +50,7 @@
             <div class="row">
                 <div class="dropdown" id="photoalbum-select">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="dropdown-caption">Photoalbums</span>
+                        <span class="dropdown-caption">{% trans "Photoalbums" %}</span>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">

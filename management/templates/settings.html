@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-Photoblog™ — Settings
+Photoblog™ — {% trans "Settings" %}
 {% endblock %}
 
 {% block header %}
-Settings
+    {% trans "Settings" %}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +19,7 @@ Settings
                     {{ user_profile_form.as_bootstrap }}
                     <div class="control-group ">
                         <div class="controls">
-                            <input class="btn btn-primary" type="submit" value="Save"/>
+                            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
                         </div>
                     </div>
                 </form>
@@ -30,7 +31,7 @@ Settings
                     {{ password_change_form.as_bootstrap }}
                     <div class="control-group ">
                         <div class="controls">
-                            <input class="btn btn-primary" type="submit" value="Change password"/>
+                            <input class="btn btn-primary" type="submit" value="{% trans "Change password" %}"/>
                         </div>
                     </div>
                 </form>
@@ -40,23 +41,24 @@ Settings
         <div class="span4 offset2">
             {% if user.profile.is_valid_token %}
                 <div class="alert alert-success">
-                    <strong>Your oAuth token is active.</strong>
+                    <strong>{% trans "Your oAuth token is active." %}</strong>
                 </div>
             {% else %}
                 <div class="alert alert-error">
-                    <strong>You need to set up new oAuth token.</strong>
+                    <strong>{% trans "You need to set up new oAuth token." %}</strong>
                 </div>
             {% endif %}
 
             <p>
-                Photoblog™ uses oAuth authorization/authentication in Picasa service, it means that we don't have your
-                Google password, we have access only to your Picasa photoalbums, and you can invalidate the token we
-                have any time at <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
+{% blocktrans %}Photoblog™ uses oAuth authorization/authentication in Picasa service,
+it means that we don't have your Google password, we have access only to
+your Picasa photoalbums, and you can invalidate the token we have any time at
+<a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.{% endblocktrans %}
             </p>
 
             <form method="POST" action="{% url personal:oauth_login %}">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-warning btn-large" value="Create new oAuth token" />
+                <input type="submit" class="btn btn-warning btn-large" value="{% trans "Create new oAuth token" %}" />
             </form>
 
         </div>

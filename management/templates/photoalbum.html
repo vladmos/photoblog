@@ -1,14 +1,16 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% load template_extra %}
 
 {% block title %}
-Photoblog™ — photoalbum “{{ photoalbum.name }}”
+Photoblog™ — {% blocktrans with name=photalbum.name %}photoalbum “{{ name }}{% endblocktrans %}”
 {% endblock %}
 
 {% block header %}
-Photoalbum “{{ photoalbum.name }}”
-<small>{{ photoalbum.photos.all|length }} photo{{ photoalbum.photos.all|length|pluralize }}</small>
+{% blocktrans with name=photalbum.name %}Photoalbum “{{ name }}{% endblocktrans %}”
+<small>
+    {% blocktrans with count length=photoalbum.photos.all|length %}{{ length }} photo{% plural %}{{ length }} photos{% endblocktrans %}
+</small>
 {% endblock %}
 
 {% block content %}

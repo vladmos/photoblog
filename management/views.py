@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import ugettext as _
 
 from utils import response
 from forms import ArticleForm, UserForm, UserProfileForm, CustomPasswordChangeForm
@@ -60,7 +61,7 @@ def save_article(request, article_id=None):
 
         if 'delete' in request.POST:
             article.delete()
-            messages.add_message(request, messages.INFO, u'The article “%s” has been deleted.' % article.name)
+            messages.add_message(request, messages.INFO, _(u'The article “%s” has been deleted.') % article.name)
             return redirect('management:index')
 
     else:
@@ -75,7 +76,7 @@ def save_article(request, article_id=None):
             article.save()
             article_id = article.id
 
-        messages.add_message(request, messages.SUCCESS, 'The article is saved.')
+        messages.add_message(request, messages.SUCCESS, _(u'The article is saved.'))
         return redirect('management:article', article_id=article_id)
 
     return response(request, 'edit_article.html', {
@@ -114,7 +115,7 @@ def change_password(request):
     password_change_form = CustomPasswordChangeForm(request.user, request.POST)
     if password_change_form.is_valid():
         password_change_form.save()
-        messages.add_message(request, messages.SUCCESS, 'You password has been changed.')
+        messages.add_message(request, messages.SUCCESS, _(u'Your password has been changed.'))
         return redirect('management:settings')
 
     return response(request, 'settings.html', {
@@ -133,7 +134,7 @@ def change_settings(request):
     if user_form.is_valid() and user_profile_form.is_valid():
         user_form.save()
         user_profile_form.save()
-        messages.add_message(request, messages.SUCCESS, 'Your settings have been changed.')
+        messages.add_message(request, messages.SUCCESS, _(u'Your settings have been changed.'))
         return redirect('management:settings')
 
     return response(request, 'settings.html', {
@@ -147,7 +148,7 @@ def change_settings(request):
 @login_required
 def update_albums(request):
     async_fetch_albums.delay()
-    messages.add_message(request, messages.INFO, 'Your photoalbums have been scheduled to be imported soon.')
+    messages.add_message(request, messages.INFO, _(u'Your photoalbums have been scheduled to be imported soon.'))
     return redirect('management:index')
 
 @csrf_exempt

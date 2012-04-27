@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-Photoblog™ — My photoalbums
+Photoblog™ — {% trans "My photoalbums" %}
 {% endblock %}
 
 {% block header %}
-My photoalbums
+    {% trans "My photoalbums" %}
 {% endblock %}
 
 {% block content %}
@@ -18,5 +19,4 @@ My photoalbums
             </ul>
         </div>
     </div>
-
 {% endblock %}

@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 ACCESS_TYPE_CHOICES = (
-    ('public', u'Public'),
-    ('private', u'Limited'),
-    ('protected', u'Protected'),
+    ('public', _(u'Public')),
+    ('private', _(u'Limited')),
+    ('protected', _(u'Protected')),
 )
 
 class PicasaAlbum(models.Model):

@@ -52,7 +52,7 @@ class UserForm(forms.ModelForm, BootstrapForm):
 class UserProfileForm(forms.ModelForm, BootstrapForm):
     class Meta:
         model = UserProfile
-        fields = ['public_name', 'personal_url', 'custom_hostname']
+        fields = ['public_name', 'personal_url', 'custom_hostname', 'language']
 
 
 class CustomPasswordChangeForm(PasswordChangeForm, BootstrapForm):

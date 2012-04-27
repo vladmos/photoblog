@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
@@ -8,14 +10,14 @@
                 {% if user.profile.is_valid_token or user.albums.all %}
                     <li class="dropdown {% if page_type == "photoalbum" %}active{% endif %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Photoalbums
+                            {% trans "Photoalbums" %}
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.albums.all %}
                                 <li><a href="{% url management:photoalbums %}">
                                     <i class="icon-list-alt"></i>
-                                    All photoalbums
+                                    {% trans "All photoalbums" %}
                                 </a></li>
                                 <li class="divider"></li>
                                 {% for photoalbum in user.albums.all %}
@@ -29,7 +31,7 @@
                             {% if user.profile.is_valid_token %}
                                 <li><a href="{% url management:update_albums %}">
                                     <i class="icon-refresh"></i>
-                                    Fetch albums
+                                    {% trans "Fetch photoalbums" %}
                                 </a></li>
                             {% endif %}
                         </ul>
@@ -38,14 +40,14 @@
                 {% if user.articles.all or user.albums.all %}
                     <li class="dropdown {% if page_type == "article" %}active{% endif %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Articles
+                            {% trans "Articles" %}
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.articles.all %}
                                 <li><a href="{% url management:articles %}">
                                     <i class="icon-list-alt"></i>
-                                    All articles
+                                    {% trans "All articles" %}
                                 </a></li>
                                 <li class="divider"></li>
                                 {% for article in user.articles.all %}
@@ -61,13 +63,13 @@
                                 {% endif %}
                                 <li><a href="{% url management:new_article %}">
                                     <i class="icon-pencil"></i>
-                                    New article
+                                    {% trans "New article" %}
                                 </a></li>
                             {% endif %}
                         </ul>
                     </li>
                 {% endif %}
-                <li {% if page_type == "settings" %}class="active"{% endif %}><a href="{% url management:settings %}">Settings</a></li>
+                <li {% if page_type == "settings" %}class="active"{% endif %}><a href="{% url management:settings %}">{% trans "Settings" %}</a></li>
             </ul>
 
             <ul class="nav pull-right">
@@ -80,14 +82,14 @@
                         <li>
                             <a href="{{ user.profile.get_blog_url }}" target="_blank">
                                 <i class="icon-camera"></i>
-                                Photoblog
+                                {% trans "Photoblog" %}
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{% url management:logout %}">
                                 <i class="icon-off"></i>
-                                Logout
+                                {% trans "Logout" %}
                             </a>
                         </li>
                     </ul>

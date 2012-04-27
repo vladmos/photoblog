@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 from django.contrib.messages import constants as messages
@@ -5,7 +6,7 @@ import djcelery
 
 _project_root = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
@@ -20,11 +21,20 @@ DATABASES = {
 }
 
 TIME_ZONE = 'Europe/Moscow'
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ('en', u'English'),
+    ('ru', u'Русский'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(_project_root, 'locale'),
+)
+
 DATE_INPUT_FORMATS = ['%d.%m.%Y']
 
 SITE_ID = 1
-USE_I18N = False
+USE_I18N = True
 USE_L10N = False
 
 MEDIA_ROOT = ''
@@ -57,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'personal.middleware.LocaleMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

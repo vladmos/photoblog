@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-Photoblog™ — My articles
+Photoblog™ — {% trans "My articles" %}
 {% endblock %}
 
 {% block header %}
-My articles
+    {% trans "My articles" %}
 {% endblock %}
 
 {% block content %}
@@ -15,9 +16,9 @@ My articles
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Article</th>
-                            <th>Slug</th>
-                            <th>Published</th>
+                            <th>{% trans "Article" %}</th>
+                            <th>{% trans "Name in URL" %}</th>
+                            <th>{% trans "Date published" %}</th>
                         </tr>
                     </thead>
                     {% for article in user.articles.all %}
@@ -30,7 +31,7 @@ My articles
                 </table>
             {% else %}
                 <div class="alert alert-info">
-                    You have no articles.
+                    {% trans "You have no articles." %}
                 </div>
             {% endif %}
         </div>

@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block header %}
-Photoblog administration
+    {% trans "Photoblog administration" %}
 {% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="span5">
-            <h2>Photoalbums</h2>
+            <h2>{% trans "Photoalbums" %}</h2>
             {% if not user.profile.is_valid_token %}
                 {% include "blocks/oauth-required.html" %}
             {% else %}
                 {% if not user.albums.all %}
                     <div class="alert alert-info">
-                        You don't have any albums imported from Picasa yet.
+                        {% trans "You don't have any albums imported from Picasa yet." %}
                     </div>
                 {% endif %}
             {% endif %}
@@ -26,7 +27,7 @@ Photoblog administration
             {% endif %}
         </div>
         <div class="span5 offset2">
-            <h2>Articles</h2>
+            <h2>{% trans "Articles" %}</h2>
             {% if user.articles.all %}
                 <ul>
                     {% for article in user.articles.all %}
@@ -35,19 +36,15 @@ Photoblog administration
                 </ul>
             {% else %}
                 <div class="alert alert-info">
-                    You don't have any articles yet.
+                    {% trans "You don't have any articles yet." %}
                     {% if not user.albums.all %}
-                        To create one you need to import at least one photoalbum from Picasa.
+                        {% trans "To create one you need to import at least one photoalbum from Picasa." %}
                     {% endif %}
                 </div>
             {% endif %}
             {% if user.albums.all %}
-                <a href="{% url management:new_article %}" class="btn btn-inverse">Create an article</a>
+                <a href="{% url management:new_article %}" class="btn btn-inverse">{% trans "Create an article" %}</a>
             {% endif %}
         </div>
     </div>
-            <!--p class="help">
-                You can revoke the token at <a href="{{ google_token_management_url }}" target="_blank">Google account admin</a>.
-                It will become inactive here on the next unsuccessful authorization attempt.
-            </p-->
 {% endblock %}
