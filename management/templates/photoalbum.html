@@ -3,13 +3,13 @@
 {% load template_extra %}
 
 {% block title %}
-Photoblog™ — {% blocktrans with name=photalbum.name %}photoalbum “{{ name }}{% endblocktrans %}”
+Photoblog™ — {% blocktrans with name=photoalbum.name %}photoalbum “{{ name }}”{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
-{% blocktrans with name=photalbum.name %}Photoalbum “{{ name }}{% endblocktrans %}”
+{% blocktrans with name=photoalbum.name %}Photoalbum “{{ name }}”{% endblocktrans %}
 <small>
-    {% blocktrans with count length=photoalbum.photos.all|length %}{{ length }} photo{% plural %}{{ length }} photos{% endblocktrans %}
+    {% blocktrans count length=photoalbum.photos.all|length %}{{ length }} photo{% plural %}{{ length }} photos{% endblocktrans %}
 </small>
 {% endblock %}
 

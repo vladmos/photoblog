@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-27 18:08+0400\n"
+"POT-Creation-Date: 2012-04-27 18:18+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Vladimir Moskva <m@fulc.ru>\n"
 "Language-Team: Vladimir Moskva <m@fulc.ru>\n"
@@ -146,13 +146,13 @@ msgstr "Создать статью"
 
 #: management/templates/photoalbum.html:6
 #, python-format
-msgid "photoalbum “%(name)s"
+msgid "photoalbum “%(name)s”"
 msgstr "фотоальбом «%(name)s»"
 
 #: management/templates/photoalbum.html:10
 #, python-format
-msgid "Photoalbum “%(name)s"
-msgstr "Фотоальбом %(name)s"
+msgid "Photoalbum “%(name)s”"
+msgstr "Фотоальбом «%(name)s»"
 
 #: management/templates/photoalbum.html:12
 #, python-format
@@ -285,3 +285,6 @@ msgstr "Ограниченный"
 #: picasa/models.py:8
 msgid "Protected"
 msgstr "Защищенный"
+
+#~ msgid "photoalbum “%(name)s"
+#~ msgstr "фотоальбом «%(name)s»"
