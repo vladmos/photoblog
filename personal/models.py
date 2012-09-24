@@ -21,9 +21,7 @@ class UserProfile(models.Model):
         verbose_name=_(u'Custom hostname'),
         max_length=50,
         validators=[HostnameValidator()],
-        blank=True,
-        null=True,
-        help_text=_(u'For alternative photoblog address. Must be set at DNS server and the webserver to work properly.'),
+        help_text=_(u'Must be set at DNS server and the webserver to work properly.'),
         unique=True,
     )
 
@@ -32,7 +30,10 @@ class UserProfile(models.Model):
     def get_blog_url(self):
         if self.custom_hostname:
             return u'http://%s/' % self.custom_hostname
-        return reverse('frontend:blog', args=[self.user.username])
+        return u'http://%s%s' % (
+            settings.PRIMARY_HOSTNAME,
+            reverse('frontend:blog', args=[self.user.username]),
+        )
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

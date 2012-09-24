@@ -1,15 +1,21 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+from django.http import Http404
 
 from models import Article
 from utils import response
 
-def index(request):
-    return response(request, 'frontend.html')
+def _get_user(request):
+    if request.owner:
+        return request.owner
+    raise Http404
 
-def blog(request, username):
-    user = get_object_or_404(User, username=username)
+def blog(request):
+    try:
+        user = _get_user(request)
+    except Http404:
+        return response(request, 'frontend.html')
+
     articles = user.articles.filter(is_published=True)
     years = set(a.event_end.year for a in articles)
     years = list(reversed(sorted(years)))
@@ -20,8 +26,8 @@ def blog(request, username):
         'years': years,
     })
 
-def view_article(request, username, article_slug):
-    user = get_object_or_404(User, username=username)
+def article(request, article_slug):
+    user = _get_user(request)
     article = get_object_or_404(Article, user=user, slug=article_slug, is_published=True)
     articles = user.articles.filter(is_published=True)
 
@@ -31,8 +37,8 @@ def view_article(request, username, article_slug):
         'article': article,
     })
 
-def rss(request, username):
-    user = get_object_or_404(User, username=username)
+def rss(request):
+    user = _get_user(request)
     articles = user.articles.filter(is_published=True)[:20]
 
     return response(request, 'rss.xml', {

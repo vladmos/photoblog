@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^~/', include(admin.site.urls)),
+    (r'^django-admin/', include(admin.site.urls)),
     
     (r'^oauth/', include('personal.urls', namespace='personal')),
     (r'^admin/', include('management.urls', namespace='management')),

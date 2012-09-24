@@ -1,3 +1,5 @@
+{% load blog_url %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +17,7 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="{% url frontend:blog user.username %}">
+            <a class="brand" href="/">
                 {{ user.profile.public_name }}
             </a>
             {% if article %}

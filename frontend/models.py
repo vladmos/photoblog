@@ -25,7 +25,7 @@ class Article(models.Model):
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('frontend:article', args=[self.user.username, self.slug])
+        return reverse('frontend:article', args=[self.slug])
 
     def event_date_human(self):
         if self.event_beginning == self.event_end:

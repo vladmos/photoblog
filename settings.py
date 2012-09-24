@@ -67,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'personal.middleware.LocaleMiddleware',
+    'personal.middleware.HostnameRoutingMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

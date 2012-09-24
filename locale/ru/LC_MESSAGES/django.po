@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-27 18:18+0400\n"
+"POT-Creation-Date: 2012-09-24 22:20+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Vladimir Moskva <m@fulc.ru>\n"
 "Language-Team: Vladimir Moskva <m@fulc.ru>\n"
@@ -60,7 +60,7 @@ msgstr "Ваш пароль был изменен"
 msgid "Your settings have been changed."
 msgstr "Ваши настройки были изменены"
 
-#: management/views.py:156 personal/views.py:48
+#: management/views.py:156 personal/views.py:61
 msgid "Your photoalbums have been scheduled to be imported soon."
 msgstr "Ваши фотоальбомы будут обновлены в ближайшее время."
 
@@ -83,7 +83,7 @@ msgstr "статья «%(name)s»"
 
 #: management/templates/edit_article.html:9
 #: management/templates/edit_article.html:18
-#: management/templates/blocks/navigation.html:66
+#: management/templates/blocks/navigation.html:72
 msgid "New article"
 msgstr "Новая статья"
 
@@ -127,7 +127,7 @@ msgid "You don't have any albums imported from Picasa yet."
 msgstr "У вас еще нет имортированных из Picasa фотоальбомов."
 
 #: management/templates/index.html:30
-#: management/templates/blocks/navigation.html:43
+#: management/templates/blocks/navigation.html:49
 msgid "Articles"
 msgstr "Статьи"
 
@@ -168,7 +168,7 @@ msgid "My photoalbums"
 msgstr "Мои фотоальбомы"
 
 #: management/templates/settings.html:5 management/templates/settings.html:9
-#: management/templates/blocks/navigation.html:72
+#: management/templates/blocks/navigation.html:78
 msgid "Settings"
 msgstr "Настройки"
 
@@ -212,23 +212,23 @@ msgstr ""
 msgid "Create new oAuth token"
 msgstr "Создать новый токен oAuth"
 
-#: management/templates/blocks/navigation.html:20
+#: management/templates/blocks/navigation.html:21
 msgid "All photoalbums"
 msgstr "Все фотоальбомы"
 
-#: management/templates/blocks/navigation.html:34
+#: management/templates/blocks/navigation.html:40
 msgid "Fetch photoalbums"
 msgstr "Выгрузить фотоальбомы"
 
-#: management/templates/blocks/navigation.html:50
+#: management/templates/blocks/navigation.html:56
 msgid "All articles"
 msgstr "Все статьи"
 
-#: management/templates/blocks/navigation.html:85
+#: management/templates/blocks/navigation.html:91
 msgid "Photoblog"
 msgstr "Фотоблог"
 
-#: management/templates/blocks/navigation.html:92
+#: management/templates/blocks/navigation.html:98
 msgid "Logout"
 msgstr "Выйти"
 
@@ -250,27 +250,24 @@ msgstr ""
 "<a href=\"%(google_token_management_url)s\" target=\"_blank"
 "\">Администрирования аккаунта Google</a>."
 
-#: personal/models.py:17
+#: personal/models.py:18
 msgid "Public name"
 msgstr "Публичное имя"
 
-#: personal/models.py:18
+#: personal/models.py:19
 msgid "Personal website"
 msgstr "Личный сайт"
 
-#: personal/models.py:20
+#: personal/models.py:21
 msgid "Custom hostname"
 msgstr "Альтернативное имя сайта"
 
-#: personal/models.py:25
-msgid ""
-"For alternative photoblog address. Must be set at DNS server and the "
-"webserver to work properly."
+#: personal/models.py:24
+msgid "Must be set at DNS server and the webserver to work properly."
 msgstr ""
-"Альтернативный адрес. Должен быть также настроен на сервере DNS и на "
-"вебсервере."
+"Должен быть также настроен на сервере DNS и на вебсервере."
 
-#: personal/models.py:29
+#: personal/models.py:28
 msgid "Language"
 msgstr "Язык"
 

@@ -3,7 +3,6 @@ Deployment dependent settings
 """
 
 # Celery
-
 BROKER_HOST = '127.0.0.1'
 BROKER_BACKEND = 'redis'
 REDIS_PORT = 6379
@@ -19,5 +18,7 @@ CELERY_TASK_RESULT_EXPIRES =  10
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Google oAuth
-
 OAUTH_CONSUMER_KEY = 'photoblog.fulc.ru'
+
+# Miscellaneous
+PRIMARY_HOSTNAME = 'photoblog.fulc.ru'

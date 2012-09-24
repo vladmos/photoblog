@@ -1,9 +1,11 @@
 {% extends "frontend_base.html" %}
 
+{% load blog_url %}
+
 {% block title %}{{ user.profile.public_name }}{% endblock %}
 
 {% block rss %}
-    <link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% url frontend:rss user.username %}" />
+    <link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% blog_rss_url user %}" />
 {% endblock %}
 
 {% block content %}
@@ -14,7 +16,7 @@
                 <h6>{{ year.grouper }}</h6>
                 <ul>
                     {% for article in year.list %}
-                        <li><a href="{% url frontend:article user.username article.slug %}">{{ article.name }}</a></li>
+                        <li><a href="{% article_url user article %}">{{ article.name }}</a></li>
                     {% endfor %}
                 </ul>
             {% endfor %}
