@@ -11,7 +11,7 @@
 {% block content %}
     <div class="row">
         <div class="span12">
-            {% regroup articles by event_end.year as article_list %}
+            {% regroup articles by year as article_list %}
             {% for year in article_list %}
                 <h6>{{ year.grouper }}</h6>
                 <ul>

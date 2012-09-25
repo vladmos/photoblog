@@ -20,7 +20,7 @@ def blog(request, year=None):
     if year:
         articles = articles.filter(year=year)
 
-    years = set(a.event_end.year for a in articles)
+    years = set(a.year for a in articles)
     years = list(reversed(sorted(years)))
 
     return response(request, 'blog.html', {
