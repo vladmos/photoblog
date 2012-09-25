@@ -10,13 +10,16 @@ def _get_user(request):
         return request.owner
     raise Http404
 
-def blog(request):
+def blog(request, year=None):
     try:
         user = _get_user(request)
     except Http404:
         return response(request, 'frontend.html')
 
     articles = user.articles.filter(is_published=True)
+    if year:
+        articles = articles.filter(year=year)
+
     years = set(a.event_end.year for a in articles)
     years = list(reversed(sorted(years)))
 
@@ -26,9 +29,9 @@ def blog(request):
         'years': years,
     })
 
-def article(request, article_slug):
+def article(request, year, slug):
     user = _get_user(request)
-    article = get_object_or_404(Article, user=user, slug=article_slug, is_published=True)
+    article = get_object_or_404(Article, user=user, year=year, slug=slug, is_published=True)
     articles = user.articles.filter(is_published=True)
 
     return response(request, 'article.html', {

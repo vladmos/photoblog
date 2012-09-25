@@ -13,6 +13,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=100, verbose_name=_(u'Name in URL'))
     raw_text = models.TextField(verbose_name=_(u'Raw text'))
     compiled_text = models.TextField()
+    year = models.IntegerField()
     event_beginning = models.DateField(verbose_name=_(u'Event started'))
     event_end = models.DateField(verbose_name=_(u'Event finished'))
     is_published = models.BooleanField(verbose_name=_(u'Published'))
@@ -22,10 +23,11 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         self.compiled_text = compile_article(self.user, self.raw_text)
+        self.year = self.event_beginning.year
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('frontend:article', args=[self.slug])
+        return reverse('frontend:article', kwargs={'year': self.event_beginning.year, 'slug': self.slug})
 
     def event_date_human(self):
         if self.event_beginning == self.event_end:
@@ -42,5 +44,5 @@ class Article(models.Model):
         )
 
     class Meta:
-        unique_together = ('slug', 'user')
+        unique_together = ('slug', 'user', 'year')
         ordering = ['event_end']

@@ -6,5 +6,6 @@ import views
 urlpatterns = patterns('',
     url(r'^$', views.blog, name='blog'),
     url(r'^~rss/$', views.rss, name='rss'),
-    url(r'^(?P<article_slug>[\w\-]+)/$', views.article, name='article'),
+    url(r'^(?P<year>\d{4})/$', views.blog, name='blog'),
+    url(r'^(?P<year>\d{4})/(?P<slug>[\w\-]+)/$', views.article, name='article'),
 )
